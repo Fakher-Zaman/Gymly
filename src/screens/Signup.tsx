@@ -1,12 +1,129 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useContext, useState } from 'react'
+// snackbar
+import Snackbar from 'react-native-snackbar';
+// context API
+import { AppwriteContext } from '../appwrite/AppwriteContext';
+// Navigation
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../routes/AuthStack';
 
-export default function Signup() {
+type SignupScreenProps = NativeStackScreenProps<AuthStackParamList, 'Signup'>
+
+export default function Signup({ navigation }: SignupScreenProps) {
+    const [error, setError] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [repeatPassword, setRepeatPassword] = useState<string>('');
+
+    const { appwrite, setIsLoggedIn } = useContext(AppwriteContext);
+
+    const handleSignUp = () => {
+        if (name.length < 1 || email.length < 1 || password.length < 1 || repeatPassword.length < 1) {
+            setError('All fields are required');
+        } else if (password !== repeatPassword) {
+            setError('Passwords do not match');
+        } else {
+            const user = {
+                name,
+                email,
+                password
+            }
+            appwrite.createUserAccount(user)
+                .then((res) => {
+                    if (res) {
+                        setIsLoggedIn(true);
+                        Snackbar.show({ text: 'Signup Successful', duration: Snackbar.LENGTH_SHORT });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setError(error.message);
+                });
+        }
+    }
+
     return (
-        <View>
-            <Text>Signup</Text>
-        </View>
-    )
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.container}>
+            <View style={styles.formContainer}>
+                <Text style={styles.appName}>Appwrite Auth</Text>
+
+                {/* Name */}
+                <TextInput
+                    value={name}
+                    onChangeText={text => {
+                        setError('');
+                        setName(text);
+                    }}
+                    placeholderTextColor={'#AEAEAE'}
+                    placeholder="Name"
+                    style={styles.input}
+                />
+
+                {/* Email */}
+                <TextInput
+                    value={email}
+                    keyboardType="email-address"
+                    onChangeText={text => {
+                        setError('');
+                        setEmail(text);
+                    }}
+                    placeholderTextColor={'#AEAEAE'}
+                    placeholder="Email"
+                    style={styles.input}
+                />
+
+                {/* Password */}
+                <TextInput
+                    value={password}
+                    onChangeText={text => {
+                        setError('');
+                        setPassword(text);
+                    }}
+                    placeholderTextColor={'#AEAEAE'}
+                    placeholder="Password"
+                    secureTextEntry
+                    style={styles.input}
+                />
+
+                {/* Repeat password */}
+                <TextInput
+                    secureTextEntry
+                    value={repeatPassword}
+                    onChangeText={text => {
+                        setError('');
+                        setRepeatPassword(text);
+                    }}
+                    placeholderTextColor={'#AEAEAE'}
+                    placeholder="Repeat Password"
+                    style={styles.input}
+                />
+
+                {/* Validation error */}
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+                {/* Signup button */}
+                <Pressable
+                    onPress={handleSignUp}
+                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}>
+                    <Text style={styles.btnText}>Sign Up</Text>
+                </Pressable>
+
+                {/* Login navigation */}
+                <Pressable
+                    onPress={() => navigation.navigate('Login')}
+                    style={styles.loginContainer}>
+                    <Text style={styles.haveAccountLabel}>
+                        Already have an account?{'  '}
+                        <Text style={styles.loginLabel}>Login</Text>
+                    </Text>
+                </Pressable>
+            </View>
+        </KeyboardAvoidingView>
+    );
 }
 
 const styles = StyleSheet.create({

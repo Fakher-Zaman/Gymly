@@ -1,12 +1,93 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useContext, useState } from 'react'
+// snackbar
+import Snackbar from 'react-native-snackbar';
+// context API
+import { AppwriteContext } from '../appwrite/AppwriteContext';
+// Navigation
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../routes/AuthStack';
 
-export default function Login() {
+type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, 'Login'>
+
+export default function Login({ navigation }: LoginScreenProps) {
+    const [error, setError] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const { appwrite, setIsLoggedIn } = useContext(AppwriteContext);
+
+    const handleLogin = () => {
+        if (email.length < 1 || password.length < 1) {
+            setError('All fields are required');
+        } else {
+            const user = {
+                email,
+                password
+            }
+            appwrite.login(user)
+                .then((res) => {
+                    if (res) {
+                        setIsLoggedIn(true);
+                        Snackbar.show({ text: 'Login Successful', duration: Snackbar.LENGTH_SHORT });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setError('Invalid email or password');
+                });
+        }
+    }
+
     return (
-        <View>
-            <Text>Login</Text>
-        </View>
-    )
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.container}>
+            <View style={styles.formContainer}>
+                <Text style={styles.appName}>Appwrite Auth</Text>
+
+                {/* Email */}
+                <TextInput
+                    keyboardType="email-address"
+                    value={email}
+                    onChangeText={text => setEmail(text)}
+                    placeholderTextColor={'#AEAEAE'}
+                    placeholder="Email"
+                    style={styles.input}
+                />
+
+                {/* Password */}
+                <TextInput
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                    placeholderTextColor={'#AEAEAE'}
+                    placeholder="Password"
+                    style={styles.input}
+                    secureTextEntry
+                />
+
+                {/* Validation error */}
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+                {/* Login button */}
+                <Pressable
+                    onPress={handleLogin}
+                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}>
+                    <Text style={styles.btnText}>Login</Text>
+                </Pressable>
+
+                {/* Sign up navigation */}
+                <Pressable
+                    onPress={() => navigation.navigate('Signup')}
+                    style={styles.signUpContainer}>
+                    <Text style={styles.noAccountLabel}>
+                        Don't have an account?{'  '}
+                        <Text style={styles.signUpLabel}>Create an account</Text>
+                    </Text>
+                </Pressable>
+            </View>
+        </KeyboardAvoidingView>
+    );
 }
 
 const styles = StyleSheet.create({

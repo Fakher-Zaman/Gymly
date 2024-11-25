@@ -1,9 +1,12 @@
 import { Alert, Button, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { logout, getUser } from '../appwrite/service';
+import Palette from '../theme/colors';
 
 export default function Home({ navigation }) {
   const [userData, setUserData] = useState();
+
+  console.log("Colors display here: ", Palette);
 
   const handleLogout = async () => {
     try {
@@ -58,7 +61,7 @@ export default function Home({ navigation }) {
       </View>
       <Button
         placement="right"
-        color="#f02e65"
+        color={Palette.primary}
         size="large"
         title="Logout"
         icon={{ name: 'logout', color: '#FFFFFF' }}

@@ -35,10 +35,19 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Home Page' }} />
-        <Stack.Screen name="Login" component={Login} options={{ title: 'Login Page' }} />
-        <Stack.Screen name="Signup" component={Signup} options={{ title: 'Signup Page' }} />
+      <Stack.Navigator>
+        {isLoggedIn ? (
+          // Protected Stack (when user is logged in)
+          <>
+            <Stack.Screen name="Home" component={Home} options={{ title: 'Home Page' }} />
+          </>
+        ) : (
+          // Auth Stack (when user is not logged in)
+          <>
+            <Stack.Screen name="Login" component={Login} options={{ title: 'Login Page' }} />
+            <Stack.Screen name="Signup" component={Signup} options={{ title: 'Signup Page' }} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,6 +3,9 @@
 # variables
 src/constants/variables.js
 
+# documents
+docs/
+
 # dependencies
 node_modules/
 

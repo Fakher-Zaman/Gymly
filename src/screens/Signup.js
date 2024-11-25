@@ -9,27 +9,33 @@ export default function Signup({ navigation }) {
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
 
-    const handleSignUp = () => {
-        if (name.length < 1 || email.length < 1 || password.length < 1 || repeatPassword.length < 1) {
-            setError('All fields are required');
-            Alert.alert('All fields are required!');
-        } else if (password !== repeatPassword) {
-            setError('Passwords do not match');
-            Alert.alert('Passwords do not match!');
-        } else {
-            signup(name, email, password)
-                .then((res) => {
-                    if (res) {
-                        setIsLoggedIn(true);
-                        Alert.alert('Success', 'User signed up successfully!');
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setError(error.message);
-                });
+    const handleSignUp = async () => {
+        try {
+            if (name.length < 1 || email.length < 1 || password.length < 1 || repeatPassword.length < 1) {
+                setError('All fields are required');
+                Alert.alert('All fields are required!');
+                return;
+            } 
+    
+            if (password !== repeatPassword) {
+                setError('Passwords do not match');
+                Alert.alert('Passwords do not match!');
+                return;
+            }
+    
+            // Call the signup function
+            const res = await signup(name, email, password);;
+    
+            if (res) {
+                Alert.alert('Success', 'User signed up successfully!');
+            }
+    
+        } catch (error) {
+            console.log(error);
+            setError(error.message);
+            Alert.alert('Error', error.message || 'An error occurred during sign up.');
         }
-    }
+    };    
 
     return (
         <KeyboardAvoidingView

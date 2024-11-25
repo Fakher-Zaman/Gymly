@@ -7,14 +7,9 @@ export default function Home({ navigation }) {
 
   const handleLogout = async () => {
     try {
-      const session = await getUser(); // Ensure session is valid
-      if (!session) {
-        Alert.alert('Error', 'No active session found.');
-        return;
-      }
-      await logout();
+      await logout(); // Perform logout logic
       Alert.alert('Success', 'Logged out successfully!');
-      navigation.navigate('Login'); // Redirect to login screen after logout
+      navigation.navigate('Login'); // Navigate to Login
     } catch (error) {
       Alert.alert('Error', error.message);
     }

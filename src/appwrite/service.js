@@ -1,7 +1,7 @@
 import { account } from './appwrite';
 
 // Signup Function
-export const signup = async (email, password, name) => {
+export const signup = async (name, email, password) => {
     try {
         const response = await account.create('unique()', email, password, name);
         console.log('User signed up:', response);

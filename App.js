@@ -15,18 +15,21 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication state
 
   useEffect(() => {
-    // Check if the user is logged in
-    getUser()
-      .then((user) => {
+    const checkUserLoggedIn = async () => {
+      try {
+        const user = await getUser(); // Await the result of getUser
         setLoading(false); // Stop loading
         if (user) {
           setIsLoggedIn(true); // User is logged in
         }
-      })
-      .catch(() => {
+      } catch (error) {
         setLoading(false); // Stop loading
         setIsLoggedIn(false); // User is not logged in
-      });
+        console.error('Error checking user login status:', error.message); // Log error for debugging
+      }
+    };
+
+    checkUserLoggedIn(); // Call the async function
   }, []);
 
   if (loading) {
@@ -35,20 +38,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {isLoggedIn ? (
-          // Protected Stack (when user is logged in)
-          <>
+        <Stack.Navigator>
+          {isLoggedIn ? (
             <Stack.Screen name="Home" component={Home} options={{ title: 'Home Page' }} />
-          </>
-        ) : (
-          // Auth Stack (when user is not logged in)
-          <>
-            <Stack.Screen name="Login" component={Login} options={{ title: 'Login Page' }} />
-            <Stack.Screen name="Signup" component={Signup} options={{ title: 'Signup Page' }} />
-          </>
-        )}
-      </Stack.Navigator>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} options={{ title: 'Login Page' }} />
+              <Stack.Screen name="Signup" component={Signup} options={{ title: 'Signup Page' }} />
+            </>
+          )}
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }

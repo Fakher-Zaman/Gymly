@@ -1,6 +1,7 @@
 import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { signup, login } from '../appwrite/service';
+import Palette from '../constants/colors';
 
 export default function Login({ navigation }) {
     const [error, setError] = useState('');
@@ -83,14 +84,14 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     appName: {
-        color: '#f02e65',
+        color: Palette.primary,
         fontSize: 40,
         fontWeight: 'bold',
         alignSelf: 'center',
         marginBottom: 20,
     },
     input: {
-        backgroundColor: '#fef8fa',
+        backgroundColor: Palette.primary50,
         padding: 10,
         height: 40,
         alignSelf: 'center',
@@ -151,6 +152,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     signUpLabel: {
-        color: '#1d9bf0',
+        color: Palette.primary,
     },
 })

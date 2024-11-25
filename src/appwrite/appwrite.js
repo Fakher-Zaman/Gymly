@@ -1,11 +1,11 @@
 import { Client, Account } from 'appwrite';
-// import Config from 'react-native-config';
+import vars from '../constants/variables';
 
 const client = new Client();
 const account = new Account(client);
 
 client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
-    .setProject('673ed3e3001a66a2c4cb'); // Your Appwrite Project ID
+    .setEndpoint(vars.apiEndpoint) // Your Appwrite Endpoint
+    .setProject(vars.apiProjectId); // Your Appwrite Project ID
 
 export { client, account };

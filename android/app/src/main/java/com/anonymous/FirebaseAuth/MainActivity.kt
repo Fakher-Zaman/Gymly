@@ -1,4 +1,4 @@
-package com.anonymous.Liftify
+package com.anonymous.FirebaseAuth
 
 import android.os.Build
 import android.os.Bundle

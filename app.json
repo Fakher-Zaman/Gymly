@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Liftify",
-    "slug": "Liftify",
+    "name": "Firebase-Auth",
+    "slug": "Firebase-Auth",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.Liftify"
+      "package": "com.anonymous.FirebaseAuth"
     },
     "web": {
       "favicon": "./assets/favicon.png"

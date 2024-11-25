@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.Liftify'
+    namespace 'com.anonymous.FirebaseAuth'
     defaultConfig {
-        applicationId 'com.anonymous.Liftify'
+        applicationId 'com.anonymous.FirebaseAuth'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -174,12 +174,3 @@ dependencies {
         implementation jscFlavor
     }
 }
-
-// import config 
-dependencies {
-	implementation "com.facebook.react:react-native:+"  // From node_modules
-	implementation project(':react-native-config')
-}
-
-apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"

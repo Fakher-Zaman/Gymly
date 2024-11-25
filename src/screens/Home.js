@@ -1,30 +1,43 @@
-import { Button, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import { Alert, Button, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { logout, getUser } from '../appwrite/service';
 
 export default function Home({ navigation }) {
   const [userData, setUserData] = useState();
 
-  const handleLogout = () => {
-    logout()
-      .then(() => {
-        Alert.alert('Success', 'User logged out successfully!');
-        setIsLoggedIn(false);
-      })
-      .catch((error) => Alert.alert('Error: ', error.message));
-  }
+  const handleLogout = async () => {
+    try {
+      const session = await getUser(); // Ensure session is valid
+      if (!session) {
+        Alert.alert('Error', 'No active session found.');
+        return;
+      }
+      await logout();
+      Alert.alert('Success', 'Logged out successfully!');
+      navigation.navigate('Login'); // Redirect to login screen after logout
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
 
   useEffect(() => {
-    getUser().then((res) => {
-      if (res) {
+    const fetchUserData = async () => {
+      try {
+        const session = await getUser();  // Will throw error if no active session
+        console.log("Session: ", session);
         const user = {
-          name: res.name,
-          email: res.email,
-        }
+          name: session.name,
+          email: session.email,
+        };
         setUserData(user);
+      } catch (error) {
+        console.log(error.message);
+        Alert.alert('Error', error.message || 'Unable to fetch user data.');
       }
-    });
-  }, [appwrite]);
+    };
+
+    fetchUserData(); // Call the function
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,7 +80,6 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     padding: 12,
-
     flex: 1,
     alignItems: 'center',
   },
@@ -83,4 +95,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FFFFFF',
   },
-})
+});

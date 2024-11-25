@@ -7,27 +7,17 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         if (email.length < 1 || password.length < 1) {
             setError('All fields are required');
             Alert.alert('All fields are required!');
         } else {
-            const user = {
-                email,
-                password
+            try {
+                await login(email, password);
+                Alert.alert('Success', 'User logged in successfully!');
+            } catch (error) {
+                Alert.alert('Error', error.message);
             }
-            login(user)
-                .then((res) => {
-                    if (res) {
-                        setIsLoggedIn(true);
-                        Alert.alert('Success', 'User logged in successfully!');
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setError('Invalid email or password');
-                    Alert.alert('Invalid email or password!');
-                });
         }
     }
 

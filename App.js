@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from './src/screens/Login';
-import Signup from './src/screens/Signup';
-import Home from './src/screens/Home';
 import Loading from './src/components/Loading'; // A loading spinner component
 import { getUser } from './src/appwrite/service';
+import AppStack from './src/routes/AppStack';
+import AuthStack from './src/routes/AuthStack';
 
 const Stack = createStackNavigator();
 
@@ -38,16 +37,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-        <Stack.Navigator>
-          {isLoggedIn ? (
-            <Stack.Screen name="Home" component={Home} options={{ title: 'Home Page' }} />
-          ) : (
-            <>
-              <Stack.Screen name="Login" component={Login} options={{ title: 'Login Page' }} />
-              <Stack.Screen name="Signup" component={Signup} options={{ title: 'Signup Page' }} />
-            </>
-          )}
-        </Stack.Navigator>
+        {isLoggedIn ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

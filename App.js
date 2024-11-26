@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import Signup from './src/screens/Signup';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
+import Landing from './src/screens/Landing';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +42,7 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={isLoggedIn ? 'Home' : 'Login'} // Dynamically set the initial route
+          initialRouteName={isLoggedIn ? 'Home' : 'Landing'} // Dynamically set the initial route
           screenOptions={{
             headerTitleAlign: 'center',
             headerBackVisible: false,
@@ -51,6 +52,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Landing" component={Landing} />
         </Stack.Navigator>
 
         <StatusBar style="dark" />

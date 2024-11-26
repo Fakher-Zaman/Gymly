@@ -6,6 +6,9 @@ src/constants/variables.js
 # documents
 docs/
 
+# images
+assets/fitness
+
 # dependencies
 node_modules/
 

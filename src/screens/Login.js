@@ -50,8 +50,8 @@ export default function Login({ navigation }) {
             style={styles.container}>
             <View style={styles.formContainer}>
                 <View style={styles.appNameContainer}>
-                    <Text style={styles.appName}>Login</Text>
-                    <FontAwesome5 name="user-lock" size={30} color={Palette.primary} />
+                    <Text style={styles.appName}>Gymly Login</Text>
+                    <FontAwesome5 name="user-lock" size={40} color={Palette.primary} />
                 </View>
 
                 {/* Email */}
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     appNameContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center', // Vertically aligns children within the container
         justifyContent: 'center',
         alignContent: 'center',
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: 'bold',
         alignSelf: 'center',
-        marginRight: 10,
+        marginBottom: 10,
     },
     input: {
         backgroundColor: Palette.primary50,

@@ -112,9 +112,10 @@ const styles = StyleSheet.create({
     appNameContainer: {
         flexDirection: 'row',
         alignItems: 'center', // Vertically aligns children within the container
+        justifyContent: 'center',
+        alignContent: 'center',
         marginBottom: 20,
         width: '100%',
-        marginHorizontal: 40,
     },    
     appName: {
         color: Palette.primary,

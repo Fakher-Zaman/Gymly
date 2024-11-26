@@ -2,6 +2,7 @@ import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, Tex
 import React, { useState } from 'react'
 import { signup } from '../appwrite/service';
 import Palette from '../constants/colors';
+import Snackbar from 'react-native-snackbar';
 
 export default function Signup({ navigation }) {
     const [error, setError] = useState('');
@@ -27,7 +28,7 @@ export default function Signup({ navigation }) {
             if (res) {
                 Snackbar.show({
                     text: 'User signed up successfully!',
-                    duration: Snackbar.LENGTH_SHORT,
+                    duration: LENGTH_SHORT,
                     action: {
                         text: 'UNDO',
                         textColor: Palette.primary,

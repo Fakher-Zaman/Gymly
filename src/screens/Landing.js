@@ -7,7 +7,7 @@ export default function Landing({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ImageBackground
-                source={require('../../assets/fitness/welcome.png')}
+                source={require('../../assets/images/welcome.png')}
                 style={styles.backgroundImage}
             >
                 <View style={styles.appLogoContainer}>
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     text: {
+        fontFamily: 'Roboto-Bold',
         fontSize: 25,
-        fontWeight: '500',
         color: '#FFFFFF',
     },
     icon: {

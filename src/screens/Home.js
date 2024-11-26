@@ -10,6 +10,7 @@ export default function Home({ navigation }) {
     try {
       await logout(); // Perform logout logic
       Alert.alert('Success', 'Logged out successfully!');
+      navigation.navigate('Login');
     } catch (error) {
       Alert.alert('Error', error.message);
     }

@@ -15,6 +15,7 @@ export default function Login({ navigation }) {
         } else {
             try {
                 await login(email, password);
+                navigation.navigate('Home');
                 Alert.alert('Success', 'User logged in successfully!');
             } catch (error) {
                 Alert.alert('Error', error.message);

@@ -1,6 +1,6 @@
 import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useContext, useState } from 'react'
-import { signup, login } from '../appwrite/service';
+import React, { useState } from 'react'
+import { signup } from '../appwrite/service';
 import Palette from '../constants/colors';
 
 export default function Signup({ navigation }) {
@@ -24,11 +24,11 @@ export default function Signup({ navigation }) {
                 return;
             }
     
-            // Call the signup function
             const res = await signup(name, email, password);;
     
             if (res) {
                 Alert.alert('Success', 'User signed up successfully!');
+                navigation.navigate('Login');
             }
     
         } catch (error) {

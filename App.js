@@ -1,52 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Loading from './src/components/Loading'; // A loading spinner component
+import Loading from './src/components/Loading';
 import { getUser } from './src/appwrite/service';
-import AppStack from './src/routes/AppStack';
-import AuthStack from './src/routes/AuthStack';
+import { StatusBar } from 'expo-status-bar';
+import Signup from './src/screens/Signup';
+import Login from './src/screens/Login';
+import Home from './src/screens/Home';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [loading, setLoading] = useState(true); // Loading state
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Authentication state
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       try {
-        const user = await getUser(); // Await the result of getUser
-        setLoading(false); // Stop loading
+        const user = await getUser();
+        setLoading(false);
         if (user) {
-          setIsLoggedIn(true); // User is logged in
+          console.log('User is logged in:', user);
+          setIsLoggedIn(true);
         }
       } catch (error) {
-        setLoading(false); // Stop loading
-        setIsLoggedIn(false); // User is not logged in
-        console.error('Error checking user login status:', error.message); // Log error for debugging
+        setLoading(false);
+        setIsLoggedIn(false);
+        console.error('Error checking user login status:', error.message);
       }
     };
 
-    checkUserLoggedIn(); // Call the async function
+    checkUserLoggedIn();
   }, []);
 
   if (loading) {
-    return <Loading />; // Show a loading spinner while checking authentication
+    return <Loading />;
   }
 
   return (
-    <NavigationContainer>
-        {isLoggedIn ? <AppStack /> : <AuthStack />}
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName={isLoggedIn ? 'Home' : 'Login'} // Dynamically set the initial route
+          screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackVisible: false,
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+
+        <StatusBar style="dark" />
+      </NavigationContainer>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

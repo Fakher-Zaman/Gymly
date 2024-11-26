@@ -2,6 +2,7 @@ import { Alert, Button, Image, SafeAreaView, StyleSheet, Text, View } from 'reac
 import React, { useEffect, useState } from 'react';
 import { logout, getUser } from '../appwrite/service';
 import Palette from '../constants/colors';
+import Snackbar from 'react-native-snackbar';
 
 export default function Home({ navigation }) {
   const [userData, setUserData] = useState();
@@ -9,10 +10,30 @@ export default function Home({ navigation }) {
   const handleLogout = async () => {
     try {
       await logout(); // Perform logout logic
-      Alert.alert('Success', 'Logged out successfully!');
+      Snackbar.show({
+        text: 'Logged out successfully!',
+        duration: Snackbar.LENGTH_SHORT,
+        action: {
+          text: 'UNDO',
+          textColor: Palette.primary,
+          onPress: () => {
+            console.log('Undo action!');
+          },
+        },
+      });
       navigation.navigate('Login');
     } catch (error) {
-      Alert.alert('Error', error.message);
+      Snackbar.show({
+        text: 'Error: ' + error.message,
+        duration: Snackbar.LENGTH_SHORT,
+        action: {
+          text: 'UNDO',
+          textColor: Palette.error,
+          onPress: () => {
+            console.log('Undo action!');
+          },
+        },
+      });
     }
   };
 
@@ -28,7 +49,6 @@ export default function Home({ navigation }) {
         setUserData(user);
       } catch (error) {
         console.log(error.message);
-        Alert.alert('Error', error.message || 'Unable to fetch user data.');
       }
     };
 

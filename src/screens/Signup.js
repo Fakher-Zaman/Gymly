@@ -14,27 +14,33 @@ export default function Signup({ navigation }) {
         try {
             if (name.length < 1 || email.length < 1 || password.length < 1 || repeatPassword.length < 1) {
                 setError('All fields are required');
-                Alert.alert('All fields are required!');
                 return;
             } 
     
             if (password !== repeatPassword) {
                 setError('Passwords do not match');
-                Alert.alert('Passwords do not match!');
                 return;
             }
     
             const res = await signup(name, email, password);;
     
             if (res) {
-                Alert.alert('Success', 'User signed up successfully!');
+                Snackbar.show({
+                    text: 'User signed up successfully!',
+                    duration: Snackbar.LENGTH_SHORT,
+                    action: {
+                        text: 'UNDO',
+                        textColor: Palette.primary,
+                        onPress: () => {
+                            console.log('Undo action!');
+                        },
+                    },
+                });
                 navigation.navigate('Login');
             }
-    
         } catch (error) {
             console.log(error);
             setError(error.message);
-            Alert.alert('Error', error.message || 'An error occurred during sign up.');
         }
     };    
 

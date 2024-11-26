@@ -1,7 +1,8 @@
-import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useContext, useState } from 'react'
-import { signup, login } from '../appwrite/service';
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
+import { login } from '../appwrite/service';
 import Palette from '../constants/colors';
+import Snackbar from 'react-native-snackbar';
 
 export default function Login({ navigation }) {
     const [error, setError] = useState('');
@@ -11,17 +12,36 @@ export default function Login({ navigation }) {
     const handleLogin = async () => {
         if (email.length < 1 || password.length < 1) {
             setError('All fields are required');
-            Alert.alert('All fields are required!');
         } else {
             try {
                 await login(email, password);
+                Snackbar.show({
+                    text: 'Logged in successfully!',
+                    duration: Snackbar.LENGTH_SHORT,
+                    action: {
+                        text: 'UNDO',
+                        textColor: Palette.primary,
+                        onPress: () => {
+                            console.log('Undo action!');
+                        },
+                    },
+                });
                 navigation.navigate('Home');
-                Alert.alert('Success', 'User logged in successfully!');
             } catch (error) {
-                Alert.alert('Error', error.message);
+                Snackbar.show({
+                    text: 'Error: ' + error.message,
+                    duration: Snackbar.LENGTH_SHORT,
+                    action: {
+                        text: 'UNDO',
+                        textColor: Palette.error,
+                        onPress: () => {
+                            console.log('Undo action!');
+                        },
+                    },
+                });
             }
         }
-    }
+    };
 
     return (
         <KeyboardAvoidingView

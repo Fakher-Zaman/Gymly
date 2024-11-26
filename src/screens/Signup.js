@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { signup } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default function Signup({ navigation }) {
     const [error, setError] = useState('');
@@ -16,15 +17,15 @@ export default function Signup({ navigation }) {
             if (name.length < 1 || email.length < 1 || password.length < 1 || repeatPassword.length < 1) {
                 setError('All fields are required');
                 return;
-            } 
-    
+            }
+
             if (password !== repeatPassword) {
                 setError('Passwords do not match');
                 return;
             }
-    
+
             const res = await signup(name, email, password);;
-    
+
             if (res) {
                 Snackbar.show({
                     text: 'User signed up successfully!',
@@ -43,14 +44,17 @@ export default function Signup({ navigation }) {
             console.log(error);
             setError(error.message);
         }
-    };    
+    };
 
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}>
             <View style={styles.formContainer}>
-                <Text style={styles.appName}>Appwrite Auth</Text>
+                <View style={styles.appNameContainer}>
+                    <Text style={styles.appName}>Signup</Text>
+                    <FontAwesome5 name="user-shield" size={30} color={Palette.primary} />
+                </View>
 
                 {/* Name */}
                 <TextInput
@@ -137,12 +141,19 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         height: '100%',
     },
+    appNameContainer: {
+        flexDirection: 'row',
+        alignItems: 'center', // Vertically aligns children within the container
+        marginBottom: 20,
+        width: '100%',
+        marginHorizontal: 40,
+    },
     appName: {
         color: Palette.primary,
         fontSize: 40,
         fontWeight: 'bold',
         alignSelf: 'center',
-        marginBottom: 20,
+        marginRight: 10,
     },
     input: {
         backgroundColor: Palette.primary50,

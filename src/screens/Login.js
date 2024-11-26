@@ -1,8 +1,9 @@
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
 import { login } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default function Login({ navigation }) {
     const [error, setError] = useState('');
@@ -48,7 +49,10 @@ export default function Login({ navigation }) {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}>
             <View style={styles.formContainer}>
-                <Text style={styles.appName}>Appwrite Auth</Text>
+                <View style={styles.appNameContainer}>
+                    <Text style={styles.appName}>Login</Text>
+                    <FontAwesome5 name="user-lock" size={30} color={Palette.primary} />
+                </View>
 
                 {/* Email */}
                 <TextInput
@@ -102,14 +106,22 @@ const styles = StyleSheet.create({
     formContainer: {
         justifyContent: 'center',
         alignContent: 'center',
+        width: '100%',
         height: '100%',
     },
+    appNameContainer: {
+        flexDirection: 'row',
+        alignItems: 'center', // Vertically aligns children within the container
+        marginBottom: 20,
+        width: '100%',
+        marginHorizontal: 40,
+    },    
     appName: {
         color: Palette.primary,
         fontSize: 40,
         fontWeight: 'bold',
         alignSelf: 'center',
-        marginBottom: 20,
+        marginRight: 10,
     },
     input: {
         backgroundColor: Palette.primary50,

@@ -28,7 +28,7 @@ export default function Signup({ navigation }) {
             if (res) {
                 Snackbar.show({
                     text: 'User signed up successfully!',
-                    duration: LENGTH_SHORT,
+                    duration: Snackbar.LENGTH_SHORT,
                     action: {
                         text: 'UNDO',
                         textColor: Palette.primary,

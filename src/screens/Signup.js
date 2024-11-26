@@ -52,7 +52,7 @@ export default function Signup({ navigation }) {
             style={styles.container}>
             <View style={styles.formContainer}>
                 <View style={styles.appNameContainer}>
-                    <Text style={styles.appName}>Gymly Signup</Text>
+                    <Text style={styles.appName}>Signup</Text>
                     <FontAwesome5 name="user-shield" size={40} color={Palette.primary} />
                 </View>
 
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     btn: {
-        backgroundColor: '#ffffff',
+        backgroundColor: Palette.primary,
         padding: 10,
         height: 45,
 
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     btnText: {
-        color: '#484848',
+        color: '#FFFFFF',
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: 18,

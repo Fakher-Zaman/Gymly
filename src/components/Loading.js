@@ -1,10 +1,11 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Palette from '../constants/colors'
 
 export default function Loading() {
     return (
         <View style={styles.container}>
-            <ActivityIndicator size="large" color="#1d9bf0" />
+            <ActivityIndicator size="large" color={Palette.primary} />
             <Text>Loading</Text>
         </View>
     )

@@ -50,7 +50,7 @@ export default function Login({ navigation }) {
             style={styles.container}>
             <View style={styles.formContainer}>
                 <View style={styles.appNameContainer}>
-                    <Text style={styles.appName}>Gymly Login</Text>
+                    <Text style={styles.appName}>Login</Text>
                     <FontAwesome5 name="user-lock" size={40} color={Palette.primary} />
                 </View>
 
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     btn: {
-        backgroundColor: '#ffffff',
+        backgroundColor: Palette.primary,
         padding: 10,
         height: 45,
 
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     btnText: {
-        color: '#484848',
+        color: '#FFFFFF',
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: 18,

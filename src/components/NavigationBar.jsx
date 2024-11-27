@@ -5,8 +5,12 @@ import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome5Brands from 'react-native-vector-icons/FontAwesome5';
 import Home from '../screens/Home';
 import Settings from '../screens/Settings';
+import Workouts from '../screens/Workouts';
+import Nutritions from '../screens/Nutritions';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,6 +69,26 @@ export default function BottomNavigationBar() {
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => {
                         return <Icon name="home" size={size} color={color} />;
+                    },
+                }}
+            />
+            <Tab.Screen
+                name="Workouts"
+                component={Workouts}
+                options={{
+                    tabBarLabel: 'Workouts',
+                    tabBarIcon: ({ color, size }) => {
+                        return <FontAwesome5Brands name="phoenix-framework" size={size} color={color} />;
+                    },
+                }}
+            />
+            <Tab.Screen
+                name="Nutritions"
+                component={Nutritions}
+                options={{
+                    tabBarLabel: 'Nutritions',
+                    tabBarIcon: ({ color, size }) => {
+                        return <FontAwesome5Brands name="nutritionix" size={size} color={color} />;
                     },
                 }}
             />

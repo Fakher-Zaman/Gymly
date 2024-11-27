@@ -15,6 +15,9 @@ const Palette = {
     background: '#121212',
     accent: '#FF9F43',
     neutral: '#E5E5E5',
+    steel: '#71797E',
+    charcoal: '#36454F',
+
     success: '#28A745',
     warning: '#FFC107',
     error: '#DC3545',

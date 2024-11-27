@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import Palette from '../constants/colors';
+import { getUser } from '../appwrite/service';
 
 const Home = ({ navigation }) => {
+    const [userData, setUserData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const fetchUserData = async () => {
+        setIsLoading(true);
+        try {
+            const session = await getUser();  // Will throw error if no active session
+            console.log("Session: ", session);
+            const user = {
+                name: session.name,
+                email: session.email,
+            };
+            setUserData(user);
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserData(); // Call the function
+    }, []);
+
     return (
         <View style={styles.container}>
             <View style={styles.welcomeContainer}>
-                <Text style={styles.headline}>Tracking Your Fitness Now!</Text>
+                <View>
+                    <Text style={styles.headline}>Welcome back 🙌</Text>
+                    {isLoading ? <Text>Loading...</Text> : <Text style={styles.username}>{userData?.name}</Text>}
+                </View>
                 <Avatar.Image
                     size={64}
                     style={styles.avatar}
@@ -21,22 +49,36 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 20,
     },
     welcomeContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 15, // Add padding for spacing
+        marginVertical: 10,
     },
     headline: {
-        fontSize: 40,
+        fontSize: 20,
         fontWeight: '600',
-        color: Palette.primary,
-        flex: 1, // Allow text to take available space
-        marginRight: 10, // Add spacing between text and avatar
+        color: Palette.steel,
+        flex: 1,
+        marginRight: 10,
+    },
+    username: {
+        fontSize: 30,
+        fontWeight: '600',
+        color: Palette.charcoal,
     },
     avatar: {
-        backgroundColor: Palette.primary,
+        backgroundColor: Palette.neutral,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
 });
 

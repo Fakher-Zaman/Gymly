@@ -13,9 +13,14 @@ export default function Signup({ navigation }) {
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [showPassword, setShowPassword] = useState(true);
+    const [showRepeatPassword, setShowRepeatPassword] = useState(true); // Separate state for repeat password
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // Toggle the visibility of the password
+    };
+
+    const toggleRepeatPasswordVisibility = () => {
+        setShowRepeatPassword(!showRepeatPassword); // Toggle the visibility of the repeat password
     };
 
     const handleSignUp = async () => {
@@ -30,7 +35,7 @@ export default function Signup({ navigation }) {
                 return;
             }
 
-            const res = await signup(name, email, password);;
+            const res = await signup(name, email, password);
 
             if (res) {
                 Snackbar.show({
@@ -61,7 +66,6 @@ export default function Signup({ navigation }) {
                     <Text style={styles.appName}>Signup</Text>
                     <FontAwesome5 name="user-shield" size={40} color={Palette.primary} />
                 </View>
-
 
                 {/* Name */}
                 <TextInput
@@ -107,7 +111,7 @@ export default function Signup({ navigation }) {
                         setError('');
                         setPassword(text);
                     }}
-                    secureTextEntry
+                    secureTextEntry={showPassword}
                     style={styles.textInput}
                     outlineColor={Palette.primary}
                     activeOutlineColor={Palette.primary700}
@@ -129,14 +133,14 @@ export default function Signup({ navigation }) {
                         setError('');
                         setRepeatPassword(text);
                     }}
-                    secureTextEntry
+                    secureTextEntry={showRepeatPassword}
                     style={styles.textInput}
                     outlineColor={Palette.primary}
                     activeOutlineColor={Palette.primary700}
                     right={
                         <TextInput.Icon
-                            icon={showPassword ? 'eye-off' : 'eye'}
-                            onPress={togglePasswordVisibility}
+                            icon={showRepeatPassword ? 'eye-off' : 'eye'}
+                            onPress={toggleRepeatPasswordVisibility}
                         />
                     }
                 />
@@ -177,9 +181,8 @@ const styles = StyleSheet.create({
     },
     appNameContainer: {
         flexDirection: 'column',
-        alignItems: 'center', // Vertically aligns children within the container
+        alignItems: 'center',
         justifyContent: 'center',
-        alignContent: 'center',
         marginBottom: 20,
         width: '100%',
     },
@@ -205,12 +208,10 @@ const styles = StyleSheet.create({
         backgroundColor: Palette.primary,
         padding: 10,
         height: 45,
-
         alignSelf: 'center',
         borderRadius: 5,
         width: '90%',
         marginTop: 10,
-
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -218,7 +219,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-
         elevation: 3,
     },
     btnText: {
@@ -239,4 +239,4 @@ const styles = StyleSheet.create({
     loginLabel: {
         color: Palette.primary,
     },
-})
+});

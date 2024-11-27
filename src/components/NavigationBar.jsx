@@ -11,6 +11,7 @@ import Home from '../screens/Home';
 import Settings from '../screens/Settings';
 import Workouts from '../screens/Workouts';
 import Nutritions from '../screens/Nutritions';
+import Pallete from '../constants/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,7 @@ export default function BottomNavigationBar() {
                 <BottomNavigation.Bar
                     navigationState={state}
                     safeAreaInsets={insets}
+                    activeColor={Pallete.primary}
                     onTabPress={({ route, preventDefault }) => {
                         const event = navigation.emit({
                             type: 'tabPress',

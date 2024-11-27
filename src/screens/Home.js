@@ -49,13 +49,13 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        padding: 15,
     },
     welcomeContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginVertical: 10,
+        marginVertical: 20,
     },
     headline: {
         fontSize: 20,

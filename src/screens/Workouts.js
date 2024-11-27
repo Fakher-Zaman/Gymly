@@ -1,11 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import AppbarHeader from '../components/AppbarHeader';
 
 export default function Workouts() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Workout</Text>
-        </View>
+        <>
+            <AppbarHeader title="Workouts" />
+            <View style={styles.container}>
+                <Text style={styles.text}>Workouts</Text>
+            </View>
+        </>
     )
 }
 

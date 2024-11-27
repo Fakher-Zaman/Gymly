@@ -177,7 +177,9 @@ const styles = StyleSheet.create({
     formContainer: {
         justifyContent: 'center',
         alignContent: 'center',
+        width: '100%',
         height: '100%',
+        paddingHorizontal: 20,
     },
     appNameContainer: {
         flexDirection: 'column',

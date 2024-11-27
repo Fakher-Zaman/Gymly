@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { Provider as PaperProvider, DefaultTheme, configureFonts } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import Loading from './src/components/Loading';
@@ -53,32 +53,39 @@ export default function App() {
     return <Loading />;
   }
 
-  // Custom theme with fonts
-  const theme = {
-    ...DefaultTheme,
-    fonts: {
+  // Font configuration
+  const fontConfig = {
+    default: {
       regular: {
         fontFamily: 'Roboto-Regular',
         fontWeight: 'normal',
       },
       medium: {
         fontFamily: 'Roboto-Bold',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
       },
       light: {
-        fontFamily: 'Roboto-Regular',
-        fontWeight: '300',
-      },
-      thin: {
-        fontFamily: 'Roboto-Regular',
-        fontWeight: '100',
-      },
-      italic: {
         fontFamily: 'Roboto-Italic',
         fontWeight: 'normal',
-        fontStyle: 'italic',
+      },
+      thin: {
+        fontFamily: 'Roboto-Italic',
+        fontWeight: 'normal',
+      },
+      bodySmall: {
+        fontFamily: 'Roboto-Regular',
+        fontWeight: 'normal',
+      },
+      bodyMedium: {
+        fontFamily: 'Roboto-Regular',
+        fontWeight: 'normal',
       },
     },
+  };
+
+  const theme = {
+    ...DefaultTheme,
+    fonts: configureFonts(fontConfig),
     roundness: 8, // Optional: Rounded corners for UI elements
     colors: {
       ...DefaultTheme.colors,

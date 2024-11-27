@@ -1,14 +1,27 @@
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+    KeyboardAvoidingView,
+    Platform,
+    Pressable,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import React, { useState } from 'react';
 import { login } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { TextInput } from 'react-native-paper';
 
 export default function Login({ navigation }) {
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(true);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword); // Toggle the visibility of the password
+    };
 
     const handleLogin = async () => {
         if (email.length < 1 || password.length < 1) {
@@ -21,7 +34,7 @@ export default function Login({ navigation }) {
                     duration: Snackbar.LENGTH_SHORT,
                     action: {
                         text: 'UNDO',
-                        textColor: Palette.primary,
+                        textColor: Palette.success,
                         onPress: () => {
                             console.log('Undo action!');
                         },
@@ -47,7 +60,8 @@ export default function Login({ navigation }) {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.container}>
+            style={styles.container}
+        >
             <View style={styles.formContainer}>
                 <View style={styles.appNameContainer}>
                     <Text style={styles.appName}>Login</Text>
@@ -56,22 +70,36 @@ export default function Login({ navigation }) {
 
                 {/* Email */}
                 <TextInput
-                    keyboardType="email-address"
+                    mode="outlined"
+                    label="Email"
+                    placeholder="Enter email"
                     value={email}
-                    onChangeText={text => setEmail(text)}
-                    placeholderTextColor={'#AEAEAE'}
-                    placeholder="Email"
-                    style={styles.input}
+                    onChangeText={(text) => setEmail(text)}
+                    style={styles.textInput}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={<TextInput.Icon icon="email" />}
                 />
 
                 {/* Password */}
                 <TextInput
+                    mode="outlined"
+                    label="Password"
+                    placeholder="Enter password"
                     value={password}
-                    onChangeText={text => setPassword(text)}
-                    placeholderTextColor={'#AEAEAE'}
-                    placeholder="Password"
-                    style={styles.input}
-                    secureTextEntry
+                    onChangeText={(text) => setPassword(text)}
+                    style={styles.textInput}
+                    secureTextEntry={!showPassword}
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={
+                        <TextInput.Icon
+                            icon={showPassword ? 'eye-off' : 'eye'}
+                            onPress={togglePasswordVisibility}
+                        />
+                    }
                 />
 
                 {/* Validation error */}
@@ -80,14 +108,16 @@ export default function Login({ navigation }) {
                 {/* Login button */}
                 <Pressable
                     onPress={handleLogin}
-                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}>
+                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}
+                >
                     <Text style={styles.btnText}>Login</Text>
                 </Pressable>
 
                 {/* Sign up navigation */}
                 <Pressable
                     onPress={() => navigation.navigate('Signup')}
-                    style={styles.signUpContainer}>
+                    style={styles.signUpContainer}
+                >
                     <Text style={styles.noAccountLabel}>
                         Don't have an account?{'  '}
                         <Text style={styles.signUpLabel}>Create an account</Text>
@@ -108,15 +138,15 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         width: '100%',
         height: '100%',
+        paddingHorizontal: 20,
     },
     appNameContainer: {
         flexDirection: 'column',
-        alignItems: 'center', // Vertically aligns children within the container
+        alignItems: 'center',
         justifyContent: 'center',
-        alignContent: 'center',
         marginBottom: 20,
         width: '100%',
-    },    
+    },
     appName: {
         color: Palette.primary,
         fontSize: 40,
@@ -124,26 +154,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 10,
     },
-    input: {
-        backgroundColor: Palette.primary50,
-        padding: 10,
-        height: 40,
-        alignSelf: 'center',
-        borderRadius: 5,
-
-        width: '80%',
-        color: '#000000',
-
+    textInput: {
         marginTop: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-
-        elevation: 1,
+        width: '90%',
+        height: 45,
+        alignSelf: 'center',
     },
     errorText: {
         color: 'red',
@@ -154,12 +169,10 @@ const styles = StyleSheet.create({
         backgroundColor: Palette.primary,
         padding: 10,
         height: 45,
-
         alignSelf: 'center',
         borderRadius: 5,
-        width: '80%',
+        width: '90%',
         marginTop: 20,
-
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -167,7 +180,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-
         elevation: 3,
     },
     btnText: {
@@ -188,4 +200,4 @@ const styles = StyleSheet.create({
     signUpLabel: {
         color: Palette.primary,
     },
-})
+});

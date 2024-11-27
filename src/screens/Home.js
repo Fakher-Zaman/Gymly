@@ -15,7 +15,7 @@ export default function Home({ navigation }) {
         duration: Snackbar.LENGTH_SHORT,
         action: {
           text: 'UNDO',
-          textColor: Palette.primary,
+          textColor: Palette.success,
           onPress: () => {
             console.log('Undo action!');
           },

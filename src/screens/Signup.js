@@ -1,9 +1,10 @@
-import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { signup } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { TextInput } from 'react-native-paper';
 
 export default function Signup({ navigation }) {
     const [error, setError] = useState('');
@@ -11,6 +12,11 @@ export default function Signup({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(true);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword); // Toggle the visibility of the password
+    };
 
     const handleSignUp = async () => {
         try {
@@ -32,7 +38,7 @@ export default function Signup({ navigation }) {
                     duration: Snackbar.LENGTH_SHORT,
                     action: {
                         text: 'UNDO',
-                        textColor: Palette.primary,
+                        textColor: Palette.success,
                         onPress: () => {
                             console.log('Undo action!');
                         },
@@ -56,55 +62,83 @@ export default function Signup({ navigation }) {
                     <FontAwesome5 name="user-shield" size={40} color={Palette.primary} />
                 </View>
 
+
                 {/* Name */}
                 <TextInput
+                    mode="outlined"
+                    label="Name"
+                    placeholder="Enter name"
                     value={name}
                     onChangeText={text => {
                         setError('');
                         setName(text);
                     }}
-                    placeholderTextColor={'#AEAEAE'}
-                    placeholder="Name"
-                    style={styles.input}
+                    style={styles.textInput}
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={<TextInput.Icon icon="account" />}
                 />
 
                 {/* Email */}
                 <TextInput
+                    mode="outlined"
+                    label="Email"
+                    placeholder="Enter email"
                     value={email}
-                    keyboardType="email-address"
                     onChangeText={text => {
                         setError('');
                         setEmail(text);
                     }}
-                    placeholderTextColor={'#AEAEAE'}
-                    placeholder="Email"
-                    style={styles.input}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    style={styles.textInput}
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={<TextInput.Icon icon="email" />}
                 />
 
                 {/* Password */}
                 <TextInput
+                    mode="outlined"
+                    label="Password"
+                    placeholder="Enter password"
                     value={password}
                     onChangeText={text => {
                         setError('');
                         setPassword(text);
                     }}
-                    placeholderTextColor={'#AEAEAE'}
-                    placeholder="Password"
                     secureTextEntry
-                    style={styles.input}
+                    style={styles.textInput}
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={
+                        <TextInput.Icon
+                            icon={showPassword ? 'eye-off' : 'eye'}
+                            onPress={togglePasswordVisibility}
+                        />
+                    }
                 />
 
-                {/* Repeat password */}
+                {/* Repeat Password */}
                 <TextInput
-                    secureTextEntry
+                    mode="outlined"
+                    label="Repeat Password"
+                    placeholder="Enter Repeat password"
                     value={repeatPassword}
                     onChangeText={text => {
                         setError('');
                         setRepeatPassword(text);
                     }}
-                    placeholderTextColor={'#AEAEAE'}
-                    placeholder="Repeat Password"
-                    style={styles.input}
+                    secureTextEntry
+                    style={styles.textInput}
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={
+                        <TextInput.Icon
+                            icon={showPassword ? 'eye-off' : 'eye'}
+                            onPress={togglePasswordVisibility}
+                        />
+                    }
                 />
 
                 {/* Validation error */}
@@ -156,26 +190,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 10,
     },
-    input: {
-        backgroundColor: Palette.primary50,
-        padding: 10,
-        height: 40,
-        alignSelf: 'center',
-        borderRadius: 5,
-
-        width: '80%',
-        color: '#000000',
-
+    textInput: {
         marginTop: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-
-        elevation: 1,
+        width: '90%',
+        height: 45,
+        alignSelf: 'center',
     },
     errorText: {
         color: 'red',
@@ -189,7 +208,7 @@ const styles = StyleSheet.create({
 
         alignSelf: 'center',
         borderRadius: 5,
-        width: '80%',
+        width: '90%',
         marginTop: 10,
 
         shadowColor: '#000',

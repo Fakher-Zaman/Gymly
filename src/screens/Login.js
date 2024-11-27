@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
                         },
                     },
                 });
-                navigation.navigate('Home');
+                navigation.navigate('Main');
             } catch (error) {
                 Snackbar.show({
                     text: 'Error: ' + error.message,

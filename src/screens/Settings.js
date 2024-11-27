@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import AppbarHeader from './AppbarHeader';
+import AppbarHeader from '../components/AppbarHeader';
 
 const Settings = () => {
     return (

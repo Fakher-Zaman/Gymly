@@ -9,7 +9,7 @@ import { getUser } from './src/appwrite/service';
 import { StatusBar } from 'expo-status-bar';
 import Signup from './src/screens/Signup';
 import Login from './src/screens/Login';
-import Home from './src/screens/Home';
+import Main from './src/screens/Main';
 import Landing from './src/screens/Landing';
 
 const Stack = createStackNavigator();
@@ -98,7 +98,7 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={isLoggedIn ? 'Home' : 'Landing'}
+          initialRouteName={isLoggedIn ? 'Main' : 'Landing'}
           screenOptions={{
             headerTitleAlign: 'center',
             headerBackVisible: false,
@@ -107,7 +107,7 @@ export default function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="Landing" component={Landing} />
         </Stack.Navigator>
         <StatusBar style="dark" />

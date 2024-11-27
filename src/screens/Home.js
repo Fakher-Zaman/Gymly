@@ -58,7 +58,6 @@ export default function Home({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <AppbarHeader /> */}
       <BottomNavigationBar />
     </SafeAreaView>
   );
@@ -67,6 +66,5 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#0B0D32',
   },
 });

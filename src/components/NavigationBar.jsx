@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 
 import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Home from './Home';
+import Settings from './Settings';
 
 const Tab = createBottomTabNavigator();
 
@@ -82,24 +84,22 @@ export default function BottomNavigationBar() {
 
 function HomeScreen() {
     return (
-        <View style={styles.container}>
-            <Text variant="headlineMedium">Home!</Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <Home />
+        </SafeAreaView>
     );
 }
 
 function SettingsScreen() {
     return (
-        <View style={styles.container}>
-            <Text variant="headlineMedium">Settings!</Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <Settings />
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });

@@ -60,7 +60,7 @@ export default function BottomNavigationBar() {
         >
             <Tab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={Home}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => {
@@ -70,7 +70,7 @@ export default function BottomNavigationBar() {
             />
             <Tab.Screen
                 name="Settings"
-                component={SettingsScreen}
+                component={Settings}
                 options={{
                     tabBarLabel: 'Settings',
                     tabBarIcon: ({ color, size }) => {
@@ -79,22 +79,6 @@ export default function BottomNavigationBar() {
                 }}
             />
         </Tab.Navigator>
-    );
-}
-
-function HomeScreen() {
-    return (
-        <SafeAreaView style={styles.container}>
-            <Home />
-        </SafeAreaView>
-    );
-}
-
-function SettingsScreen() {
-    return (
-        <SafeAreaView style={styles.container}>
-            <Settings />
-        </SafeAreaView>
     );
 }
 

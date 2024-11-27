@@ -1,15 +1,15 @@
 const Palette = {
-    primary: '#F44336', // Base color (Tomato Red)
-    primary50: '#FFEBEE',  // Very light (Backgrounds/Accents)
-    primary100: '#FFCDD2', // Light (Light accents/Highlights)
-    primary200: '#EF9A9A', // Slightly lighter than mid-tone
-    primary300: '#E57373', // Medium-light (Hover states)
-    primary400: '#EF5350', // Slightly darker (Hover/Emphasis)
-    primary500: '#F44336', // Mid-tone (Base for Buttons/Icons)
-    primary600: '#E53935', // Slightly dark (Active/Pressed states)
-    primary700: '#D32F2F', // Dark (Header, Important highlights)
-    primary800: '#C62828', // Darker (Alerts/Dark buttons)
-    primary900: '#B71C1C', // Very dark (Strong emphasis/Alerts)
+    primary: '#40B5AD', // Base color (Verdigris green)
+    primary50: '#E6F4F3',   // Very light green
+    primary100: '#CCEAE7',  // Light green
+    primary200: '#99D5CE',  // Light-medium green
+    primary300: '#66C0B6',  // Medium green
+    primary400: '#4CB9AF',  // Medium-dark green
+    primary500: '#40B5AD',  // Base color
+    primary600: '#389E97',  // Darker green
+    primary700: '#2F857E',  // Even darker green
+    primary800: '#266C65',  // Deep green
+    primary900: '#1E534D',  // Very deep green)
 
     secondary: '#6610F2',
     background: '#121212',

@@ -11,6 +11,8 @@ import Signup from './src/screens/Signup';
 import Login from './src/screens/Login';
 import Main from './src/screens/Main';
 import Landing from './src/screens/Landing';
+import Home from './src/screens/Home';
+import Settings from './src/screens/Settings';
 
 const Stack = createStackNavigator();
 
@@ -109,6 +111,8 @@ export default function App() {
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="Landing" component={Landing} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Settings" component={Settings} />
         </Stack.Navigator>
         <StatusBar style="dark" />
       </NavigationContainer>

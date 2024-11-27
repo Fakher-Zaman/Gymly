@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import Palette from '../constants/colors';
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.welcomeContainer}>

@@ -18,6 +18,9 @@ const Palette = {
     steel: '#71797E',
     charcoal: '#36454F',
 
+    white: '#FFFFFF',
+    black: '#000000',
+
     success: '#28A745',
     warning: '#FFC107',
     error: '#DC3545',

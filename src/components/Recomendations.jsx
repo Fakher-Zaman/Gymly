@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, FlatList } from 'react-native';
-import { Avatar, Surface, Text } from 'react-native-paper';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { Surface, Text } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import Palette from '../constants/colors';
 

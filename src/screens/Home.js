@@ -4,6 +4,8 @@ import { Avatar } from 'react-native-paper';
 import Palette from '../constants/colors';
 import { getUser } from '../appwrite/service';
 import { Surface, Text } from 'react-native-paper';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const Home = ({ navigation }) => {
     const [userData, setUserData] = useState(null);
@@ -30,6 +32,8 @@ const Home = ({ navigation }) => {
         fetchUserData(); // Call the function
     }, []);
 
+    const progress = 75;
+
     return (
         <View style={styles.container}>
             <View style={styles.welcomeContainer}>
@@ -50,7 +54,34 @@ const Home = ({ navigation }) => {
                         style={styles.imageBackground}
                         imageStyle={styles.imageOpacity}
                     >
-                        <Text style={styles.overlayText}>Your Custom Text</Text>
+                        <AnimatedCircularProgress
+                            size={120}
+                            width={15}
+                            fill={progress}
+                            tintColor={progress > 50 ? "#4CAF50" : "#F44336"} // Green if > 50%, else Red
+                            tintColorSecondary="#FFEB3B" // Optional gradient-like effect
+                            backgroundColor="#E0E0E0" // Unfilled color
+                            lineCap="round"
+                            rotation={0} // Progress starts at the top
+                            style={styles.processContainer}
+                        >
+                            {fill => (
+                                <View style={styles.textContainer}>
+                                    <Text style={styles.text}>{`${Math.round(fill)}%`}</Text>
+                                </View>
+                            )}
+                        </AnimatedCircularProgress>
+                        <Text style={styles.overlayText}>Build Your Muscles</Text>
+                        <View style={styles.ratingContainer}>
+                            <FontAwesome5
+                                name="star"
+                                size={27}
+                                color={Palette.white}
+                                solid
+                                style={{ color: Palette.warning }}
+                            />
+                            <Text style={styles.text}>4.5</Text>
+                        </View>
                     </ImageBackground>
                 </Surface>
             </View>
@@ -107,7 +138,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', // Center text horizontally
     },
     imageOpacity: {
-        opacity: 0.6, // Adjust image opacity
+        opacity: 0.7, // Adjust image opacity
         resizeMode: 'cover', // Ensures the image covers the surface dimensions
     },
     overlayText: {
@@ -118,6 +149,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
         borderRadius: 5,
+    },
+    processContainer: {
+        position: 'absolute',
+        top: 10,
+        left: 10,
+    },
+    textContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Palette.white,
+    },
+    ratingContainer: {
+        position: 'absolute',
+        bottom: 15,
+        right: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
     },
 });
 

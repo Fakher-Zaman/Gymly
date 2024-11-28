@@ -42,7 +42,7 @@ export const getUser = async () => {
         console.log('Current User:', user);
         return user;
     } catch (error) {
-        console.error('Get User Error:', error);
-        throw error;
+        // console.error('Get User Error:', error);
+        // throw error;
     }
 };

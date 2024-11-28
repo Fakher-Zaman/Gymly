@@ -6,6 +6,7 @@ import { getUser } from '../appwrite/service';
 import { Surface, Text } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import Recomendations from '../components/Recomendations';
 
 const Home = ({ navigation }) => {
     const [userData, setUserData] = useState(null);
@@ -85,6 +86,7 @@ const Home = ({ navigation }) => {
                     </ImageBackground>
                 </Surface>
             </View>
+            <Recomendations />
         </View>
     );
 };
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         borderRadius: 5,
     },
+
     processContainer: {
         position: 'absolute',
         top: 10,

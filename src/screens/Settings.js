@@ -47,7 +47,6 @@ const Settings = ({ navigation }) => {
 
     return (
         <>
-            <AppbarHeader title="Settings" />
             <View style={styles.container}>
                 <Text style={styles.headlineText}>Settings!</Text>
                 <Button

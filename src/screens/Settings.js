@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Button, Dialog, Portal, Card, IconButton, Text, Avatar, Badge, Divider, Icon, Switch } from 'react-native-paper';
+import { Button, Dialog, Portal, Card, IconButton, Text, Avatar, Badge, Divider, Switch } from 'react-native-paper';
 import Palette from '../constants/colors';
 import { getUser, logout } from '../appwrite/service';
 import Snackbar from 'react-native-snackbar';
@@ -70,14 +70,6 @@ const Settings = ({ navigation }) => {
     return (
         <ScrollView>
             <View style={styles.container}>
-                {/* <Text style={styles.headlineText}>Settings!</Text>
-                <Button
-                    mode="contained"
-                    onPress={showDialog}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>Logout</Text>
-                </Button> */}
                 <View style={styles.profileContainer}>
                     <Avatar.Image
                         size={84}
@@ -107,7 +99,7 @@ const Settings = ({ navigation }) => {
                         <Card.Title
                             title={
                                 <View style={{ flexDirection: 'row', gap: 10 }}>
-                                    <Text style={{ fontSize: 17, marginTop: 5}}>My Stories</Text>
+                                    <Text style={{ fontSize: 17, marginTop: 5 }}>My Stories</Text>
                                     <Badge style={{ backgroundColor: Palette.accent }}>2</Badge>
                                 </View>
                             }
@@ -146,11 +138,13 @@ const Settings = ({ navigation }) => {
                             )}
                         />
                         <Divider bold={true} horizontalInset={16} />
-                        <Card.Title
-                            title={<Text style={{ color: Palette.error, fontSize: 17, marginTop: 5, fontWeight: 'bold' }}>Logout</Text>}
-                            left={(props) => <Avatar.Icon backgroundColor={Palette.error} {...props} icon="logout" />}
-                            onPress={() => showDialog()}
-                        />
+                        <TouchableOpacity onPress={showDialog}>
+                            <Card.Title
+                                title={<Text style={{ color: Palette.error, fontSize: 17, marginTop: 5, fontWeight: 'bold' }}>Logout</Text>}
+                                left={(props) => <Avatar.Icon backgroundColor={Palette.error} {...props} icon="logout" />}
+                                onPress={() => showDialog()}
+                            />
+                        </TouchableOpacity>
                     </Card>
                 </View>
 

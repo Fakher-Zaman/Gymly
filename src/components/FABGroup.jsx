@@ -14,6 +14,8 @@ export default function FABGroup() {
         <PaperProvider>
             <Portal>
                 <FAB.Group
+                    color={Palette.white}
+                    fabStyle={{ backgroundColor: Palette.primary }}
                     open={open}
                     visible
                     icon={open ? 'calendar-today' : 'plus'}

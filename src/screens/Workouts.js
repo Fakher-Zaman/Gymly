@@ -42,9 +42,12 @@ const workoutData = [
     },
 ];
 
-export default function Workouts() {
+export default function Workouts({ navigation }) {
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
+        >
             <Image source={item.image} style={styles.image} />
             <View style={styles.info}>
                 <Text style={styles.title}>{item.title}</Text>

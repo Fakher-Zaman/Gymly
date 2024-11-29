@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Firebase-Auth",
-    "slug": "Firebase-Auth",
+    "name": "Gymly",
+    "slug": "Gymly",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

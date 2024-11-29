@@ -86,7 +86,6 @@ const Settings = ({ navigation }) => {
                     )}
                     <Button
                         mode="contained"
-                        onPress={showDialog}
                         style={styles.button}
                     >
                         <Text style={styles.buttonText}>Edit Profile</Text>

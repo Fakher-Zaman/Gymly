@@ -41,7 +41,7 @@ const Home = ({ navigation }) => {
             <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.welcomeContainer}>
-                        <View>
+                        <View style={styles.headlineContainer}>
                             <Text style={styles.headline}>Welcome back 🙌</Text>
                             {isLoading ? (
                                 <Text>Loading...</Text>
@@ -114,6 +114,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginVertical: 20,
+    },
+    headlineContainer: {
+        height: 65,        
     },
     headline: {
         fontSize: 20,

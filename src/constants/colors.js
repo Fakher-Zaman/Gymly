@@ -21,6 +21,9 @@ const Palette = {
     white: '#FFFFFF',
     black: '#000000',
 
+    textGray: '#909497',
+    cardBackground: '#f9f9f9',
+
     success: '#28A745',
     warning: '#FFC107',
     error: '#DC3545',

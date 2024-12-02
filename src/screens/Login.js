@@ -58,6 +58,9 @@ export default function Login({ navigation }) {
                     style={styles.textInput}
                     keyboardType="email-address"
                     autoCapitalize="none"
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
+                    right={<TextInput.Icon icon="email" />}
                 />
                 <TextInput
                     mode="outlined"
@@ -67,6 +70,8 @@ export default function Login({ navigation }) {
                     onChangeText={setPassword}
                     style={styles.textInput}
                     secureTextEntry={!showPassword}
+                    outlineColor={Palette.primary}
+                    activeOutlineColor={Palette.primary700}
                     right={
                         <TextInput.Icon
                             icon={showPassword ? 'eye-off' : 'eye'}

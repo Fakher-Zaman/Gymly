@@ -1,38 +1,17 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Dialog, Portal, Card, IconButton, Text, Avatar, Badge, Divider, Switch } from 'react-native-paper';
 import Palette from '../constants/colors';
-import { getUser, logout } from '../appwrite/service';
+import { logout } from '../appwrite/service';
 import Snackbar from 'react-native-snackbar';
 import { clearUser } from '../redux/slices/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Settings = ({ navigation }) => {
-    const [userData, setUserData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
     const [visible, setVisible] = useState(false);
     const [isSwitchOn, setIsSwitchOn] = useState(false);
+    const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
-
-    const fetchUserData = async () => {
-        setIsLoading(true);
-        try {
-            const session = await getUser();
-            const user = {
-                name: session.name,
-                email: session.email,
-            };
-            setUserData(user);
-        } catch (error) {
-            console.log(error.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchUserData();
-    }, []);
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
@@ -80,14 +59,10 @@ const Settings = ({ navigation }) => {
                         style={styles.avatar}
                         source={require('../../assets/avatar.png')}
                     />
-                    {isLoading ? (
-                        <Text style={{ height: 60, alignItems: 'center' }}>Loading...</Text>
-                    ) : (
                         <View style={{ height: 60, alignItems: 'center' }}>
-                            <Text style={styles.username}>{userData?.name}</Text>
-                            <Text style={styles.email}>{userData?.email}</Text>
+                            <Text style={styles.username}>{user?.name}</Text>
+                            <Text style={styles.email}>{user?.email}</Text>
                         </View>
-                    )}
                     <Button
                         mode="contained"
                         style={styles.button}

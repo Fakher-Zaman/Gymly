@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { Avatar, Provider as PaperProvider, Portal } from 'react-native-paper';
 import Palette from '../constants/colors';
-import { getUser } from '../appwrite/service';
 import { Surface, Text } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -12,12 +11,7 @@ import FABGroup from '../components/FABGroup';
 import { useSelector } from 'react-redux';
 
 const Home = ({ navigation }) => {
-    const [userData, setUserData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
     const user = useSelector((state) => state.user.user);
-    console.log("first", user);
-
     const progress = 75;
 
     return (
@@ -27,11 +21,7 @@ const Home = ({ navigation }) => {
                     <View style={styles.welcomeContainer}>
                         <View style={styles.headlineContainer}>
                             <Text style={styles.headline}>Welcome back 🙌</Text>
-                            {/* {isLoading ? (
-                                <Text>Loading...</Text>
-                            ) : ( */}
-                                <Text style={styles.username}>{user?.name}</Text>
-                            {/* )} */}
+                            <Text style={styles.username}>{user?.name}</Text>
                         </View>
                         <Avatar.Image
                             size={64}

@@ -1,9 +1,16 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { SegmentedButtons } from 'react-native-paper';
 import AppbarHeader from '../components/AppbarHeader';
 import { workoutData } from '../lib/data';
+import Palette from '../constants/colors';
 
 export default function Workouts({ navigation }) {
+    const [filter, setFilter] = useState('All');
+
+    const filteredData =
+        filter === 'All' ? workoutData : workoutData.filter((item) => item.category === filter);
+
     const renderItem = ({ item }) => (
         <TouchableOpacity
             style={styles.card}
@@ -21,8 +28,21 @@ export default function Workouts({ navigation }) {
     return (
         <>
             <AppbarHeader title="Workouts" navigation={navigation} />
+            <View style={styles.segmentedButtonContainer}>
+                <SegmentedButtons
+                    theme={{ colors: { primary: Palette.primary } }}
+                    value={filter}
+                    onValueChange={setFilter}
+                    buttons={[
+                        { value: 'All', label: 'All' },
+                        { value: 'Strength', label: 'Strength' },
+                        { value: 'Cardio', label: 'Cardio' },
+                        { value: 'Core', label: 'Core' },
+                    ]}
+                />
+            </View>
             <FlatList
-                data={workoutData}
+                data={filteredData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.list}
@@ -34,6 +54,11 @@ export default function Workouts({ navigation }) {
 const styles = StyleSheet.create({
     list: {
         padding: 16,
+    },
+    segmentedButtonContainer: {
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        backgroundColor: '#fff',
     },
     card: {
         flexDirection: 'row',

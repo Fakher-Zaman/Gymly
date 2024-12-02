@@ -9,6 +9,7 @@ import Recomendations from '../components/Recomendations';
 import UpcomingActivities from '../components/UpcomingActivities';
 import FABGroup from '../components/FABGroup';
 import { useSelector } from 'react-redux';
+import BodyBuilderExercises from '../components/BodyBuilderExercises';
 
 const Home = ({ navigation }) => {
     const user = useSelector((state) => state.user.user);
@@ -69,6 +70,7 @@ const Home = ({ navigation }) => {
                     </View>
                     <Recomendations />
                     <UpcomingActivities />
+                    <BodyBuilderExercises />
                 </View>
             </ScrollView>
             <Portal>

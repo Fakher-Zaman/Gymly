@@ -21,8 +21,7 @@ const Stack = createStackNavigator();
 
 export default function AppNavigator() {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    console.log("User: ", isLoggedIn);
-
+    
     return (
         <NavigationContainer>
             <Stack.Navigator

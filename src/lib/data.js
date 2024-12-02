@@ -196,4 +196,16 @@ const nutritionData = [
     },
 ];
 
-export { workoutData, nutritionData };
+const exercises = [
+    { id: '1', title: 'Chest Workout', image: require('../../assets/images/chest.png') },
+    { id: '2', title: 'Back Workout', image: require('../../assets/images/back.png') },
+    { id: '3', title: 'Lower Leg Workout', image: require('../../assets/images/lowerLegs.png') },
+    { id: '4', title: 'Upper Leg Workout', image: require('../../assets/images/upperLegs.png') },
+    { id: '5', title: 'Lower Arm Workout', image: require('../../assets/images/lowerArms.png') },
+    { id: '6', title: 'Upper Arm Workout', image: require('../../assets/images/upperArms.png') },
+    { id: '7', title: 'Shoulder Workout', image: require('../../assets/images/shoulders.png') },
+    { id: '8', title: 'Neck Workout', image: require('../../assets/images/neck.png') },
+    { id: '9', title: 'Waist Workout', image: require('../../assets/images/waist.png') },
+];
+
+export { workoutData, nutritionData, exercises };

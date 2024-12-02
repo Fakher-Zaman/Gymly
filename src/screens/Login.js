@@ -7,17 +7,20 @@ import {
     View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { login } from '../appwrite/service';
+import { getUser, login } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TextInput } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/slices/userSlice';
 
 export default function Login({ navigation }) {
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(true);
+    const dispatch = useDispatch();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // Toggle the visibility of the password
@@ -29,6 +32,8 @@ export default function Login({ navigation }) {
         } else {
             try {
                 await login(email, password);
+                const userData = await getUser(); // Fetch user data
+                dispatch(setUser(userData));
                 Snackbar.show({
                     text: 'Logged in successfully!',
                     duration: Snackbar.LENGTH_SHORT,

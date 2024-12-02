@@ -9,10 +9,16 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Recomendations from '../components/Recomendations';
 import UpcomingActivities from '../components/UpcomingActivities';
 import FABGroup from '../components/FABGroup';
+import { useSelector } from 'react-redux';
 
 const Home = ({ navigation }) => {
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+
+    const user = useSelector((state) => state.user.userData);
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    console.log("User Data:", user);
+    console.log("Logged In:", isLoggedIn);
 
     const fetchUserData = async () => {
         setIsLoading(true);

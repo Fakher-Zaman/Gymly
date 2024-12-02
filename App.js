@@ -17,6 +17,8 @@ import WorkoutDetail from './src/screens/WorkoutDetail';
 import NutritionDetail from './src/screens/NutritionDetail';
 import Workouts from './src/screens/Workouts';
 import Nutritions from './src/screens/Nutritions';
+import { store } from './src/redux/store';
+import { Provider } from 'react-redux';
 
 const Stack = createStackNavigator();
 
@@ -101,29 +103,31 @@ export default function App() {
   };
 
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName={isLoggedIn ? 'Main' : 'Landing'}
-          screenOptions={{
-            headerTitleAlign: 'center',
-            headerBackVisible: false,
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Main" component={Main} />
-          <Stack.Screen name="Landing" component={Landing} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="Workouts" component={Workouts} />
-          <Stack.Screen name="WorkoutDetail" component={WorkoutDetail} />
-          <Stack.Screen name="Nutritions" component={Nutritions} />
-          <Stack.Screen name="NutritionDetail" component={NutritionDetail} />
-        </Stack.Navigator>
-        <StatusBar style="dark" />
-      </NavigationContainer>
-    </PaperProvider>
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName={isLoggedIn ? 'Main' : 'Landing'}
+            screenOptions={{
+              headerTitleAlign: 'center',
+              headerBackVisible: false,
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Signup" component={Signup} />
+            <Stack.Screen name="Main" component={Main} />
+            <Stack.Screen name="Landing" component={Landing} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="Workouts" component={Workouts} />
+            <Stack.Screen name="WorkoutDetail" component={WorkoutDetail} />
+            <Stack.Screen name="Nutritions" component={Nutritions} />
+            <Stack.Screen name="NutritionDetail" component={NutritionDetail} />
+          </Stack.Navigator>
+          <StatusBar style="dark" />
+        </NavigationContainer>
+      </PaperProvider>
+    </Provider>
   );
 }

@@ -4,12 +4,15 @@ import { Button, Dialog, Portal, Card, IconButton, Text, Avatar, Badge, Divider,
 import Palette from '../constants/colors';
 import { getUser, logout } from '../appwrite/service';
 import Snackbar from 'react-native-snackbar';
+import { clearUser } from '../redux/slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Settings = ({ navigation }) => {
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [visible, setVisible] = useState(false);
     const [isSwitchOn, setIsSwitchOn] = useState(false);
+    const dispatch = useDispatch();
 
     const fetchUserData = async () => {
         setIsLoading(true);
@@ -38,6 +41,7 @@ const Settings = ({ navigation }) => {
     const handleLogout = async () => {
         try {
             await logout();
+            dispatch(clearUser());
             navigation.navigate('Login');
             Snackbar.show({
                 text: 'Logged out successfully!',

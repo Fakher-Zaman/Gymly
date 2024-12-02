@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import AppbarHeader from '../components/AppbarHeader';
-import Palette from '../constants/colors';
 import { workoutData } from '../lib/data';
 
 export default function Workouts({ navigation }) {
@@ -22,33 +21,28 @@ export default function Workouts({ navigation }) {
     return (
         <>
             <AppbarHeader title="Workouts" navigation={navigation} />
-            <View style={styles.container}>
-                <FlatList
-                    data={workoutData}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id.toString()}
-                    contentContainerStyle={styles.list}
-                />
-            </View>
+            <FlatList
+                data={workoutData}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={styles.list}
+            />
         </>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
     list: {
-        paddingBottom: 16,
+        padding: 16,
     },
     card: {
         flexDirection: 'row',
-        backgroundColor: Palette.cardBackground,
-        borderRadius: 10,
+        marginBottom: 16,
+        alignItems: 'center',
+        backgroundColor: '#f8f8f8',
+        borderRadius: 8,
         padding: 12,
-        marginBottom: 12,
-        elevation: 3,
+        elevation: 2,
     },
     image: {
         width: 80,

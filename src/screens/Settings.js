@@ -4,8 +4,8 @@ import { Button, Dialog, Portal, Card, IconButton, Text, Avatar, Badge, Divider,
 import Palette from '../constants/colors';
 import { logout } from '../appwrite/service';
 import Snackbar from 'react-native-snackbar';
-import { clearUser } from '../redux/slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '../redux/slices/userSlice';
 
 const Settings = ({ navigation }) => {
     const [visible, setVisible] = useState(false);

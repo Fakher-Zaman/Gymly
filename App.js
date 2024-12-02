@@ -12,9 +12,6 @@ import AppNavigator from './src/components/NavigationContainer';
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   // Load fonts using `expo-font`
   const [fontsLoaded] = useFonts({
     'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -23,28 +20,12 @@ export default function App() {
   });
 
   useEffect(() => {
-    const checkUserLoggedIn = async () => {
-      try {
-        const user = await getUser();
-        setLoading(false);
-        if (user) {
-          console.log('User is logged in:', user);
-          setIsLoggedIn(true);
-        }
-      } catch (error) {
-        setLoading(false);
-        setIsLoggedIn(false);
-        console.error('Error checking user login status:', error.message);
-      }
-    };
-
     if (fontsLoaded) {
       SplashScreen.hideAsync();
-      checkUserLoggedIn();
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded || loading) {
+  if (!fontsLoaded) {
     return <Loading />;
   }
 
@@ -93,7 +74,7 @@ export default function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider theme={theme}>
-          <AppNavigator isLoggedIn={isLoggedIn} />
+          <AppNavigator />
         </PaperProvider>
       </PersistGate>
     </Provider>

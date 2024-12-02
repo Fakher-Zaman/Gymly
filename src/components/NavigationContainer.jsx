@@ -15,10 +15,14 @@ import WorkoutDetail from '../screens/WorkoutDetail';
 import NutritionDetail from '../screens/NutritionDetail';
 import Workouts from '../screens/Workouts';
 import Nutritions from '../screens/Nutritions';
+import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 
-export default function AppNavigator({ isLoggedIn }) {
+export default function AppNavigator() {
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    console.log("User: ", isLoggedIn);
+
     return (
         <NavigationContainer>
             <Stack.Navigator

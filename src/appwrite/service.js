@@ -30,7 +30,7 @@ export const logout = async () => {
         await account.deleteSession('current');
         console.log('User logged out');
     } catch (error) {
-        console.error('Logout Error:', error);
+        console.log('Logout Error:', error);
         throw error;
     }
 };
@@ -42,7 +42,7 @@ export const getUser = async () => {
         console.log('Current User:', user);
         return user;
     } catch (error) {
-        // console.error('Get User Error:', error);
-        // throw error;
+        console.log('Get User Error:', error);
+        throw error;
     }
 };

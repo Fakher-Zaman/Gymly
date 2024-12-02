@@ -21,7 +21,7 @@ export default function Workouts({ navigation }) {
 
     return (
         <>
-            <AppbarHeader title="Workouts" />
+            <AppbarHeader title="Workouts" navigation={navigation} />
             <View style={styles.container}>
                 <FlatList
                     data={workoutData}

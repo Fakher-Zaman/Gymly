@@ -2,10 +2,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import AppbarHeader from '../components/AppbarHeader';
 
-export default function Nutritions() {
+export default function Nutritions({navigation}) {
     return (
         <>
-            <AppbarHeader title="Nutritions" />
+            <AppbarHeader title="Nutritions" navigation={navigation} />
             <View style={styles.container}>
                 <Text style={styles.text}>Nutritions</Text>
             </View>

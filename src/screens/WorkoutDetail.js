@@ -49,7 +49,7 @@ export default function WorkoutDetail({ route, navigation }) {
 
     return (
         <>
-            <AppbarHeader title="Workout Detail" />
+            <AppbarHeader title="Workout Detail" navigation={navigation} />
             <ScrollView>
                 <View style={styles.container}>
                     <Image source={workout.gifImage} style={styles.gif} />

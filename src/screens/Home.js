@@ -38,8 +38,8 @@ const Home = ({ navigation }) => {
 
     return (
         <PaperProvider>
-            <View style={styles.container}>
-                <ScrollView>
+            <ScrollView>
+                <View style={styles.container}>
                     <View style={styles.welcomeContainer}>
                         <View style={styles.headlineContainer}>
                             <Text style={styles.headline}>Welcome back 🙌</Text>
@@ -95,11 +95,11 @@ const Home = ({ navigation }) => {
                     </View>
                     <Recomendations />
                     <UpcomingActivities />
-                </ScrollView>
-                <Portal>
-                    <FABGroup />
-                </Portal>
-            </View>
+                </View>
+            </ScrollView>
+            <Portal>
+                <FABGroup />
+            </Portal>
         </PaperProvider>
     );
 };
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     headlineContainer: {
-        height: 65,        
+        height: 65,
     },
     headline: {
         fontSize: 20,

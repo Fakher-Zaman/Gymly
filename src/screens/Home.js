@@ -15,30 +15,8 @@ const Home = ({ navigation }) => {
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const user = useSelector((state) => state.user.userData);
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    console.log("User Data:", user);
-    console.log("Logged In:", isLoggedIn);
-
-    const fetchUserData = async () => {
-        setIsLoading(true);
-        try {
-            const session = await getUser();
-            const user = {
-                name: session.name,
-                email: session.email,
-            };
-            setUserData(user);
-        } catch (error) {
-            console.log(error.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchUserData();
-    }, []);
+    const user = useSelector((state) => state.user.user);
+    console.log("first", user);
 
     const progress = 75;
 
@@ -49,11 +27,11 @@ const Home = ({ navigation }) => {
                     <View style={styles.welcomeContainer}>
                         <View style={styles.headlineContainer}>
                             <Text style={styles.headline}>Welcome back 🙌</Text>
-                            {isLoading ? (
+                            {/* {isLoading ? (
                                 <Text>Loading...</Text>
-                            ) : (
-                                <Text style={styles.username}>{userData?.name}</Text>
-                            )}
+                            ) : ( */}
+                                <Text style={styles.username}>{user?.name}</Text>
+                            {/* )} */}
                         </View>
                         <Avatar.Image
                             size={64}

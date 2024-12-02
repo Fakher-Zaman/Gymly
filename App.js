@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider, DefaultTheme, configureFonts } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import Loading from './src/components/Loading';
 import { getUser } from './src/appwrite/service';
-import { StatusBar } from 'expo-status-bar';
-import Signup from './src/screens/Signup';
-import Login from './src/screens/Login';
-import Main from './src/screens/Main';
-import Landing from './src/screens/Landing';
-import Home from './src/screens/Home';
-import Settings from './src/screens/Settings';
-import WorkoutDetail from './src/screens/WorkoutDetail';
-import NutritionDetail from './src/screens/NutritionDetail';
-import Workouts from './src/screens/Workouts';
-import Nutritions from './src/screens/Nutritions';
 import { Provider } from 'react-redux';
 import store, { persistor } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-
-const Stack = createStackNavigator();
+import AppNavigator from './src/components/NavigationContainer';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -107,28 +93,7 @@ export default function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider theme={theme}>
-          <NavigationContainer>
-            <Stack.Navigator
-              initialRouteName={isLoggedIn ? 'Main' : 'Landing'}
-              screenOptions={{
-                headerTitleAlign: 'center',
-                headerBackVisible: false,
-                headerShown: false,
-              }}
-            >
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Signup" component={Signup} />
-              <Stack.Screen name="Main" component={Main} />
-              <Stack.Screen name="Landing" component={Landing} />
-              <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="Settings" component={Settings} />
-              <Stack.Screen name="Workouts" component={Workouts} />
-              <Stack.Screen name="WorkoutDetail" component={WorkoutDetail} />
-              <Stack.Screen name="Nutritions" component={Nutritions} />
-              <Stack.Screen name="NutritionDetail" component={NutritionDetail} />
-            </Stack.Navigator>
-            <StatusBar style="dark" />
-          </NavigationContainer>
+          <AppNavigator isLoggedIn={isLoggedIn} />
         </PaperProvider>
       </PersistGate>
     </Provider>

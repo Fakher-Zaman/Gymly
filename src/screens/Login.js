@@ -1,41 +1,64 @@
+import {
+    KeyboardAvoidingView,
+    Platform,
+    Pressable,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { getUser, login } from '../appwrite/service';
+import Palette from '../constants/colors';
+import Snackbar from 'react-native-snackbar';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/slices/userSlice';
-import { login, getUser } from '../appwrite/service';
-import Snackbar from 'react-native-snackbar';
-import { TextInput } from 'react-native-paper';
-import Palette from '../constants/colors';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default function Login({ navigation }) {
+    const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(true);
     const dispatch = useDispatch();
 
-    const togglePasswordVisibility = () => setShowPassword(!showPassword);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword); // Toggle the visibility of the password
+    };
 
     const handleLogin = async () => {
-        if (!email || !password) {
+        if (email.length < 1 || password.length < 1) {
             setError('All fields are required');
-            return;
-        }
-        try {
-            await login(email, password);
-            const userData = await getUser();
-            dispatch(setUser(userData)); // Save user data in Redux
-            Snackbar.show({
-                text: 'Logged in successfully!',
-                duration: Snackbar.LENGTH_SHORT,
-            });
-            navigation.navigate('Main');
-        } catch (error) {
-            Snackbar.show({
-                text: 'Error: ' + error.message,
-                duration: Snackbar.LENGTH_SHORT,
-            });
+        } else {
+            try {
+                await login(email, password);
+                const userData = await getUser();
+                dispatch(setUser(userData));
+                Snackbar.show({
+                    text: 'Logged in successfully!',
+                    duration: Snackbar.LENGTH_SHORT,
+                    action: {
+                        text: 'UNDO',
+                        textColor: Palette.success,
+                        onPress: () => {
+                            console.log('Undo action!');
+                        },
+                    },
+                });
+                navigation.navigate('Main');
+            } catch (error) {
+                Snackbar.show({
+                    text: 'Error: ' + error.message,
+                    duration: Snackbar.LENGTH_SHORT,
+                    action: {
+                        text: 'UNDO',
+                        textColor: Palette.error,
+                        onPress: () => {
+                            console.log('Undo action!');
+                        },
+                    },
+                });
+            }
         }
     };
 
@@ -49,12 +72,14 @@ export default function Login({ navigation }) {
                     <Text style={styles.appName}>Login</Text>
                     <FontAwesome5 name="user-lock" size={40} color={Palette.primary} />
                 </View>
+
+                {/* Email */}
                 <TextInput
                     mode="outlined"
                     label="Email"
                     placeholder="Enter email"
                     value={email}
-                    onChangeText={setEmail}
+                    onChangeText={(text) => setEmail(text)}
                     style={styles.textInput}
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -62,12 +87,14 @@ export default function Login({ navigation }) {
                     activeOutlineColor={Palette.primary700}
                     right={<TextInput.Icon icon="email" />}
                 />
+
+                {/* Password */}
                 <TextInput
                     mode="outlined"
                     label="Password"
                     placeholder="Enter password"
                     value={password}
-                    onChangeText={setPassword}
+                    onChangeText={(text) => setPassword(text)}
                     style={styles.textInput}
                     secureTextEntry={!showPassword}
                     outlineColor={Palette.primary}
@@ -79,13 +106,26 @@ export default function Login({ navigation }) {
                         />
                     }
                 />
+
+                {/* Validation error */}
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <Pressable onPress={handleLogin} style={styles.btn}>
+
+                {/* Login button */}
+                <Pressable
+                    onPress={handleLogin}
+                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}
+                >
                     <Text style={styles.btnText}>Login</Text>
                 </Pressable>
-                <Pressable onPress={() => navigation.navigate('Signup')} style={styles.signUpContainer}>
+
+                {/* Sign up navigation */}
+                <Pressable
+                    onPress={() => navigation.navigate('Signup')}
+                    style={styles.signUpContainer}
+                >
                     <Text style={styles.noAccountLabel}>
-                        Don't have an account? <Text style={styles.signUpLabel}>Create one</Text>
+                        Don't have an account?{'  '}
+                        <Text style={styles.signUpLabel}>Create an account</Text>
                     </Text>
                 </Pressable>
             </View>

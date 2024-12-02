@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react
 import React from 'react';
 import AppbarHeader from '../components/AppbarHeader';
 import Palette from '../constants/colors';
-import workoutData from '../lib/data';
+import { workoutData } from '../lib/data';
 
 export default function Workouts({ navigation }) {
     const renderItem = ({ item }) => (

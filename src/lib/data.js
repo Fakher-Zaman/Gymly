@@ -109,4 +109,91 @@ const workoutData = [
     },
 ];
 
-export default workoutData;
+const nutritionData = [
+    {
+        id: 1,
+        name: 'Apple',
+        details: 'A medium apple contains about 95 calories, is high in fiber, and supports digestion.',
+        image: require('../../assets/nutritions/pngs/apple.png'),
+        benefits: 'Rich in antioxidants, supports heart health, and aids in weight management.',
+    },
+    {
+        id: 2,
+        name: 'Banana',
+        details: 'A medium banana has about 105 calories, is rich in potassium, and boosts energy.',
+        image: require('../../assets/nutritions/pngs/banana.png'),
+        benefits: 'Supports muscle function, prevents cramps, and aids digestion.',
+    },
+    {
+        id: 3,
+        name: 'Broccoli',
+        details: 'One cup of broccoli contains 55 calories and is packed with vitamins C and K.',
+        image: require('../../assets/nutritions/pngs/broccoli.png'),
+        benefits: 'Improves immunity, supports bone health, and is rich in fiber.',
+    },
+    {
+        id: 4,
+        name: 'Almonds',
+        details: 'A handful of almonds provides 160 calories and healthy fats.',
+        image: require('../../assets/nutritions/pngs/almonds.png'),
+        benefits: 'Supports brain health, improves skin quality, and boosts energy.',
+    },
+    {
+        id: 5,
+        name: 'Salmon',
+        details: 'Salmon is rich in omega-3 fatty acids and has about 200 calories per 3-ounce serving.',
+        image: require('../../assets/nutritions/pngs/salmon.png'),
+        benefits: 'Promotes brain health, reduces inflammation, and supports heart health.',
+    },
+    {
+        id: 6,
+        name: 'Spinach',
+        details: 'One cup of spinach has only 23 calories and is rich in iron and calcium.',
+        image: require('../../assets/nutritions/pngs/spinach.png'),
+        benefits: 'Boosts immunity, improves bone health, and promotes healthy skin.',
+    },
+    {
+        id: 7,
+        name: 'Eggs',
+        details: 'One large egg contains about 70 calories and is a great source of protein.',
+        image: require('../../assets/nutritions/pngs/eggs.png'),
+        benefits: 'Supports muscle repair, boosts brain health, and is nutrient-dense.',
+    },
+    {
+        id: 8,
+        name: 'Carrots',
+        details: 'One cup of carrots contains about 50 calories and is high in vitamin A.',
+        image: require('../../assets/nutritions/pngs/carrots.png'),
+        benefits: 'Supports eye health, improves skin, and strengthens immunity.',
+    },
+    {
+        id: 9,
+        name: 'Blueberries',
+        details: 'A cup of blueberries has 84 calories and is packed with antioxidants.',
+        image: require('../../assets/nutritions/pngs/blueberries.png'),
+        benefits: 'Supports brain function, improves memory, and reduces inflammation.',
+    },
+    {
+        id: 10,
+        name: 'Greek Yogurt',
+        details: 'One cup of Greek yogurt contains about 100 calories and is rich in probiotics.',
+        image: require('../../assets/nutritions/pngs/greek-yogurt.png'),
+        benefits: 'Supports gut health, strengthens bones, and is a good protein source.',
+    },
+    {
+        id: 11,
+        name: 'Sweet Potato',
+        details: 'One medium sweet potato has about 112 calories and is rich in beta-carotene.',
+        image: require('../../assets/nutritions/pngs/sweet-potato.png'),
+        benefits: 'Improves eye health, boosts immunity, and supports digestion.',
+    },
+    {
+        id: 12,
+        name: 'Avocado',
+        details: 'Half an avocado contains about 120 calories and healthy fats.',
+        image: require('../../assets/nutritions/pngs/avocado.png'),
+        benefits: 'Promotes heart health, improves skin, and helps in nutrient absorption.',
+    },
+];
+
+export { workoutData, nutritionData };

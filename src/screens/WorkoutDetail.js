@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
 import AppbarHeader from '../components/AppbarHeader';
 import Palette from '../constants/colors';
-import workoutData from '../lib/data';
+import { workoutData } from '../lib/data';
 
 export default function WorkoutDetail({ route, navigation }) {
     const { workout } = route.params;

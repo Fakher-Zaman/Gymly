@@ -19,9 +19,6 @@ const UpcomingActivities = () => {
             color: isDarkMode ? Palette.darkText : Palette.charcoal,
             marginBottom: 10,
         },
-        activityList: {
-            paddingBottom: 10,
-        },
         activityItem: {
             flexDirection: 'row',
             alignItems: 'center',

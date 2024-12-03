@@ -10,18 +10,20 @@ const BodyBuilderExercises = () => {
 
     const styles = StyleSheet.create({
         container: {
-            marginTop: 20,
+            marginTop: 10,
+            marginBottom: 5,
             backgroundColor: isDarkMode ? Palette.darkBackground : '#fff',
         },
         heading: {
             fontSize: 18,
             fontWeight: 'bold',
             color: isDarkMode ? Palette.darkText : '#333',
-            marginBottom: 10,
+            marginBottom: 20,
         },
         card: {
             marginRight: 15,
             alignItems: 'center',
+            width: 100,
         },
         image: {
             width: 100,
@@ -34,6 +36,7 @@ const BodyBuilderExercises = () => {
             fontSize: 14,
             fontWeight: '500',
             color: isDarkMode ? Palette.darkTextGray : '#555',
+            textAlign: 'center',
         },
     });
 

@@ -1,42 +1,37 @@
-import React, { useEffect, useCallback } from 'react';
-import { View, StyleSheet, FlatList, Text, ImageBackground } from 'react-native';  // Ensure these are from 'react-native'
-import { Surface } from 'react-native-paper';  // Make sure this is imported from 'react-native-paper'
+import React, { useCallback } from 'react';
+import { View, StyleSheet, FlatList, Text, ImageBackground } from 'react-native';
+import { Surface } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useSelector } from 'react-redux';
 import Palette from '../constants/colors';
 import { items } from '../lib/data';
 
-export default function Recomendations() {
-    const theme = useSelector((state) => state.theme);  // Access theme from Redux store
+const Recomendations = () => {
+    const theme = useSelector((state) => state.theme);
     const isDarkMode = theme === 'dark';
 
-    // Memoize styles based on theme to prevent unnecessary recalculations
     const styles = StyleSheet.create({
-        recomendationsContainer: {
+        container: {
             marginTop: 15,
         },
-        recomendationsHeading: {
+        heading: {
             fontSize: 22,
             fontWeight: 'bold',
             color: isDarkMode ? Palette.darkText : '#333',
+            marginBottom: 10,
         },
-        surfaceContainer: {
-            marginHorizontal: 10,
-        },
-        surface: {
+        card: {
             height: 200,
             width: 150,
             borderRadius: 8,
             overflow: 'hidden',
+            marginRight: 10,
         },
         imageBackground: {
             height: '100%',
             width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
-        },
-        imageOpacity: {
-            opacity: 0.8,
         },
         overlayText: {
             fontSize: 18,
@@ -47,52 +42,37 @@ export default function Recomendations() {
             paddingVertical: 5,
             borderRadius: 5,
         },
-        text: {
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: Palette.white,
-        },
-        carousel: {
-            paddingVertical: 15,
-        },
     });
 
-    // Memoize renderItem function to avoid unnecessary re-renders
-    const renderItem = useCallback(
+    const renderRecomendation = useCallback(
         ({ item }) => (
-            <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.surfaceContainer}>
-                <Surface style={styles.surface} elevation={1}>
+            <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.card}>
+                <Surface style={styles.card} elevation={1}>
                     <ImageBackground
                         source={item.image}
                         style={styles.imageBackground}
-                        imageStyle={styles.imageOpacity}
                     >
                         <Text style={styles.overlayText}>{item.text}</Text>
                     </ImageBackground>
                 </Surface>
             </Animated.View>
         ),
-        [isDarkMode] // Add isDarkMode as a dependency
+        [isDarkMode]
     );
 
-    if (!items || items.length === 0) {
-        return <Text>Loading...</Text>;  // Show loading text if items is empty
-    }
-
     return (
-        <View style={styles.recomendationsContainer}>
-            <Text style={styles.recomendationsHeading}>Recomendations</Text>
+        <View style={styles.container}>
+            <Text style={styles.heading}>Recomendations</Text>
             <FlatList
                 data={items}
-                keyExtractor={(item) => item.id.toString() + (isDarkMode ? 'dark' : 'light')} // Use dynamic key to force re-render on theme change
-                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={renderRecomendation}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.carousel}
-                extraData={isDarkMode}
-                initialNumToRender={5}
-                maxToRenderPerBatch={10}
+                contentContainerStyle={{ paddingVertical: 10 }}
             />
         </View>
     );
-}
+};
+
+export default Recomendations;

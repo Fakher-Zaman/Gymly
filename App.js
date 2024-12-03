@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Provider as PaperProvider, DefaultTheme, configureFonts } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import Loading from './src/components/Loading';
-import { getUser } from './src/appwrite/service';
 import { Provider } from 'react-redux';
 import store, { persistor } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';

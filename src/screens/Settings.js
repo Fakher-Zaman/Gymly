@@ -10,13 +10,11 @@ import { toggleTheme } from '../redux/slices/themeSlice';
 
 const Settings = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
-    const [isSwitchOn, setIsSwitchOn] = useState(false);
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
-    // const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
     const theme = useSelector((state) => state.theme);
     const isDarkMode = theme === 'dark';
 

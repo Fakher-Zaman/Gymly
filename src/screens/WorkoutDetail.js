@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, ScrollView } from 'react-native';
 import AppbarHeader from '../components/AppbarHeader';
 import Palette from '../constants/colors';
+import { useSelector } from 'react-redux';
 import { workoutData } from '../lib/data';
 
 export default function WorkoutDetail({ route, navigation }) {
@@ -9,6 +10,9 @@ export default function WorkoutDetail({ route, navigation }) {
     const [seconds, setSeconds] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [timeOver, setTimeOver] = useState(false);
+
+    const theme = useSelector((state) => state.theme);  // Access theme from Redux store
+    const isDarkMode = theme === 'dark';  // Check if the current theme is dark mode
 
     const workoutTime = parseInt(workout.timing.split(' ')[0]); // Extract time in seconds
 
@@ -46,6 +50,69 @@ export default function WorkoutDetail({ route, navigation }) {
             alert('No more exercises! Great job!');
         }
     };
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            padding: 16,
+            alignItems: 'center',
+            backgroundColor: isDarkMode ? Palette.darkBackground : '#fff',
+            minHeight: '100%',
+        },
+        gif: {
+            width: 300,
+            height: 300,
+            borderRadius: 8,
+            marginBottom: 16,
+        },
+        title: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            marginBottom: 8,
+            color: isDarkMode ? Palette.darkText : Palette.charcoal,
+        },
+        details: {
+            fontSize: 16,
+            textAlign: 'center',
+            color: isDarkMode ? Palette.darkText : Palette.charcoal,
+            marginBottom: 16,
+        },
+        timerContainer: {
+            alignItems: 'center',
+        },
+        timer: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginBottom: 16,
+            color: isDarkMode ? Palette.darkText : Palette.charcoal,
+        },
+        buttonContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            width: '60%',
+            marginBottom: 16,
+        },
+        timeOverContainer: {
+            alignItems: 'center',
+            marginTop: 16,
+        },
+        errorMessage: {
+            fontSize: 18,
+            color: 'red',
+            marginBottom: 16,
+        },
+        nextButton: {
+            backgroundColor: Palette.primary,
+            paddingVertical: 12,
+            paddingHorizontal: 24,
+            borderRadius: 8,
+        },
+        nextButtonText: {
+            fontSize: 16,
+            color: '#fff',
+            fontWeight: 'bold',
+        },
+    });
 
     return (
         <>
@@ -88,64 +155,3 @@ export default function WorkoutDetail({ route, navigation }) {
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        minHeight: '100%',
-    },
-    gif: {
-        width: 300,
-        height: 300,
-        borderRadius: 8,
-        marginBottom: 16,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    details: {
-        fontSize: 16,
-        textAlign: 'center',
-        color: '#555',
-        marginBottom: 16,
-    },
-    timerContainer: {
-        alignItems: 'center',
-    },
-    timer: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 16,
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '60%',
-        marginBottom: 16,
-    },
-    timeOverContainer: {
-        alignItems: 'center',
-        marginTop: 16,
-    },
-    errorMessage: {
-        fontSize: 18,
-        color: 'red',
-        marginBottom: 16,
-    },
-    nextButton: {
-        backgroundColor: Palette.primary,
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 8,
-    },
-    nextButtonText: {
-        fontSize: 16,
-        color: '#fff',
-        fontWeight: 'bold',
-    },
-});

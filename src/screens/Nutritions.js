@@ -49,7 +49,7 @@ export default function Nutritions({ navigation }) {
             flexDirection: 'row',
             marginBottom: 16,
             alignItems: 'center',
-            backgroundColor: isDarkMode ? Palette.darkCardBackground : '#f8f8f8',
+            backgroundColor: isDarkMode ? Palette.darkCardBackground : Palette.white,
             borderRadius: 8,
             padding: 12,
             elevation: 2,

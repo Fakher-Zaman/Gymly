@@ -17,7 +17,7 @@ export default function Workouts({ navigation }) {
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
-            style={[styles.card, { backgroundColor: isDarkMode ? Palette.darkCardBackground : '#f8f8f8' }]}
+            style={[styles.card, { backgroundColor: isDarkMode ? Palette.darkCardBackground : Palette.white }]}
             onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
         >
             <Image source={item.image} style={styles.image} />

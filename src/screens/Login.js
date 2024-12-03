@@ -12,7 +12,7 @@ import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TextInput } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/slices/userSlice';
 
 export default function Login({ navigation }) {
@@ -21,6 +21,9 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(true);
     const dispatch = useDispatch();
+
+    const theme = useSelector((state) => state.theme);
+    const isDarkMode = theme === 'dark';
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // Toggle the visibility of the password
@@ -62,6 +65,82 @@ export default function Login({ navigation }) {
         }
     };
 
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: isDarkMode ? Palette.darkBackground : '#fff',
+            minHeight: '100%',
+        },
+        formContainer: {
+            justifyContent: 'center',
+            alignContent: 'center',
+            width: '100%',
+            height: '100%',
+            paddingHorizontal: 20,
+        },
+        appNameContainer: {
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 20,
+            width: '100%',
+        },
+        appName: {
+            color: Palette.primary,
+            fontSize: 40,
+            fontWeight: 'bold',
+            alignSelf: 'center',
+            marginBottom: 10,
+        },
+        textInput: {
+            marginTop: 10,
+            width: '90%',
+            height: 45,
+            alignSelf: 'center',
+            backgroundColor: isDarkMode ? Palette.darkBackground : '#fff',
+        },
+        errorText: {
+            color: 'red',
+            alignSelf: 'center',
+            marginTop: 10,
+        },
+        btn: {
+            backgroundColor: Palette.primary,
+            padding: 10,
+            height: 45,
+            alignSelf: 'center',
+            borderRadius: 5,
+            width: '90%',
+            marginTop: 20,
+            shadowColor: '#000',
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.23,
+            shadowRadius: 2.62,
+            elevation: 3,
+        },
+        btnText: {
+            color: '#FFFFFF',
+            alignSelf: 'center',
+            fontWeight: 'bold',
+            fontSize: 18,
+        },
+        signUpContainer: {
+            marginTop: 80,
+        },
+        noAccountLabel: {
+            color: isDarkMode ? Palette.textGray : '#484848',
+            alignSelf: 'center',
+            fontWeight: 'bold',
+            fontSize: 15,
+        },
+        signUpLabel: {
+            color: Palette.primary,
+        },
+    });
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -78,14 +157,15 @@ export default function Login({ navigation }) {
                     mode="outlined"
                     label="Email"
                     placeholder="Enter email"
+                    placeholderTextColor={isDarkMode && Palette.textGray}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                     style={styles.textInput}
                     keyboardType="email-address"
                     autoCapitalize="none"
-                    outlineColor={Palette.primary}
-                    activeOutlineColor={Palette.primary700}
-                    right={<TextInput.Icon icon="email" />}
+                    outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
+                    activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
+                    right={<TextInput.Icon color={isDarkMode && Palette.textGray} icon="email" />}
                 />
 
                 {/* Password */}
@@ -93,6 +173,7 @@ export default function Login({ navigation }) {
                     mode="outlined"
                     label="Password"
                     placeholder="Enter password"
+                    placeholderTextColor={isDarkMode && Palette.textGray}
                     value={password}
                     onChangeText={(text) => setPassword(text)}
                     style={styles.textInput}
@@ -101,6 +182,7 @@ export default function Login({ navigation }) {
                     activeOutlineColor={Palette.primary700}
                     right={
                         <TextInput.Icon
+                            color={isDarkMode && Palette.textGray}
                             icon={showPassword ? 'eye-off' : 'eye'}
                             onPress={togglePasswordVisibility}
                         />
@@ -132,77 +214,3 @@ export default function Login({ navigation }) {
         </KeyboardAvoidingView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-    },
-    formContainer: {
-        justifyContent: 'center',
-        alignContent: 'center',
-        width: '100%',
-        height: '100%',
-        paddingHorizontal: 20,
-    },
-    appNameContainer: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
-        width: '100%',
-    },
-    appName: {
-        color: Palette.primary,
-        fontSize: 40,
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        marginBottom: 10,
-    },
-    textInput: {
-        marginTop: 10,
-        width: '90%',
-        height: 45,
-        alignSelf: 'center',
-    },
-    errorText: {
-        color: 'red',
-        alignSelf: 'center',
-        marginTop: 10,
-    },
-    btn: {
-        backgroundColor: Palette.primary,
-        padding: 10,
-        height: 45,
-        alignSelf: 'center',
-        borderRadius: 5,
-        width: '90%',
-        marginTop: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 3,
-    },
-    btnText: {
-        color: '#FFFFFF',
-        alignSelf: 'center',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-    signUpContainer: {
-        marginTop: 80,
-    },
-    noAccountLabel: {
-        color: '#484848',
-        alignSelf: 'center',
-        fontWeight: 'bold',
-        fontSize: 15,
-    },
-    signUpLabel: {
-        color: Palette.primary,
-    },
-});

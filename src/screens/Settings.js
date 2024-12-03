@@ -12,11 +12,11 @@ const Settings = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
+    const theme = useSelector((state) => state.theme);
+    const isDarkMode = theme === 'dark';
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
-    const theme = useSelector((state) => state.theme);
-    const isDarkMode = theme === 'dark';
 
     const handleLogout = async () => {
         try {
@@ -51,6 +51,60 @@ const Settings = ({ navigation }) => {
         }
     };
 
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            padding: 15,
+            backgroundColor: isDarkMode ? Palette.darkBackground : Palette.background,
+        },
+        button: {
+            marginTop: 20,
+            padding: 2,
+            backgroundColor: Palette.primary,
+        },
+        buttonText: {
+            color: 'white',
+            fontSize: 18,
+        },
+        dialogBox: {
+            borderRadius: 10,
+            backgroundColor: isDarkMode ? Palette.darkCardBackground : Palette.cardBackground,
+        },
+        okayButton: {
+            backgroundColor: Palette.primary,
+            paddingHorizontal: 10,
+            borderRadius: 10,
+        },
+        profileContainer: {
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 30,
+            marginBottom: 20,
+        },
+        username: {
+            fontSize: 28,
+            fontWeight: '600',
+            color: isDarkMode ? Palette.darkText : Palette.charcoal,
+        },
+        cardContainer: {
+            padding: 2,
+            marginBottom: 20,
+        },
+        cardTitle: {
+            fontSize: 18,
+            fontWeight: '600',
+            marginBottom: 8,
+            marginLeft: 10,
+            color: isDarkMode ? Palette.darkTextGray : Palette.textGray,
+        },
+        card: {
+            borderRadius: 15,
+            backgroundColor: isDarkMode ? Palette.darkCardBackground : Palette.cardBackground,
+            elevation: 5,
+        },
+    });
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -62,7 +116,7 @@ const Settings = ({ navigation }) => {
                     />
                     <View style={{ height: 60, alignItems: 'center' }}>
                         <Text style={styles.username}>{user?.name}</Text>
-                        <Text style={styles.email}>{user?.email}</Text>
+                        <Text style={{ color: isDarkMode ? Palette.darkTextGray : Palette.textGray }}>{user?.email}</Text>
                     </View>
                     <Button
                         mode="contained"
@@ -78,7 +132,7 @@ const Settings = ({ navigation }) => {
                         <Card.Title
                             title={
                                 <View style={{ flexDirection: 'row', gap: 10 }}>
-                                    <Text style={{ fontSize: 17, marginTop: 5 }}>My Stories</Text>
+                                    <Text style={{ fontSize: 17, marginTop: 5, color: isDarkMode ? Palette.darkText : Palette.charcoal }}>My Stories</Text>
                                     <Badge style={{ backgroundColor: Palette.accent }}>2</Badge>
                                 </View>
                             }
@@ -90,6 +144,7 @@ const Settings = ({ navigation }) => {
                         <Divider bold={true} horizontalInset={16} />
                         <Card.Title
                             title="Support"
+                            titleStyle={{ color: isDarkMode ? Palette.darkText : Palette.charcoal }}
                             left={(props) => <Avatar.Icon backgroundColor={Palette.primary} {...props} icon="head-question" />}
                             right={(props) => (
                                 <IconButton {...props} icon="arrow-right" onPress={() => { }} />
@@ -103,6 +158,7 @@ const Settings = ({ navigation }) => {
                     <Card style={styles.card}>
                         <Card.Title
                             title="Switch Mode"
+                            titleStyle={{ color: isDarkMode ? Palette.darkText : Palette.charcoal }}
                             left={(props) => <Avatar.Icon backgroundColor={Palette.primary} {...props} icon="toggle-switch" />}
                             right={(props) => (
                                 <Switch
@@ -115,6 +171,7 @@ const Settings = ({ navigation }) => {
                         <Divider bold={true} horizontalInset={16} />
                         <Card.Title
                             title="Reset Password"
+                            titleStyle={{ color: isDarkMode ? Palette.darkText : Palette.charcoal }}
                             left={(props) => <Avatar.Icon backgroundColor={Palette.primary} {...props} icon="head-question" />}
                             right={(props) => (
                                 <IconButton {...props} icon="arrow-right" onPress={() => { }} />
@@ -124,6 +181,7 @@ const Settings = ({ navigation }) => {
                         <TouchableOpacity onPress={showDialog}>
                             <Card.Title
                                 title={<Text style={{ color: Palette.error, fontSize: 17, marginTop: 5, fontWeight: 'bold' }}>Logout</Text>}
+                                titleStyle={{ color: isDarkMode ? Palette.darkText : Palette.charcoal }}
                                 left={(props) => <Avatar.Icon backgroundColor={Palette.error} {...props} icon="logout" />}
                                 onPress={() => showDialog()}
                             />
@@ -132,15 +190,17 @@ const Settings = ({ navigation }) => {
                 </View>
 
                 <Portal>
-                    <Dialog visible={visible} onDismiss={hideDialog} style={styles.dialogBox} mode="md">
-                        <Dialog.Title>Logout</Dialog.Title>
+                    <Dialog visible={visible} onDismiss={hideDialog} style={styles.dialogBox}>
+                        <Dialog.Title style={{ color: isDarkMode ? Palette.darkText : Palette.text }}>Logout</Dialog.Title>
                         <Dialog.Content>
-                            <Text variant="bodyMedium">Are you sure you want to logout?</Text>
+                            <Text style={{ color: isDarkMode ? Palette.darkText : Palette.text }}>
+                                Are you sure you want to logout?
+                            </Text>
                         </Dialog.Content>
                         <Dialog.Actions>
                             <Button
                                 onPress={hideDialog}
-                                textColor={Palette.steel} // Custom color for No button
+                                textColor={Palette.steel}
                             >
                                 No
                             </Button>
@@ -158,81 +218,5 @@ const Settings = ({ navigation }) => {
         </ScrollView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 15,
-    },
-    headlineText: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    button: {
-        marginTop: 20,
-        padding: 2,
-        backgroundColor: Palette.primary,
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 18,
-    },
-    dialogBox: {
-        borderRadius: 10,
-    },
-    okayButton: {
-        backgroundColor: Palette.primary,
-        paddingHorizontal: 10,
-        borderRadius: 10,
-    },
-    profileContainer: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginTop: 30,
-        marginBottom: 20,
-    },
-    username: {
-        fontSize: 28,
-        fontWeight: '600',
-        color: Palette.charcoal,
-    },
-    avatar: {
-        backgroundColor: Palette.neutral,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    cardContainer: {
-        padding: 2,
-        marginBottom: 20,
-    },
-    cardTitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        marginBottom: 8,
-        marginLeft: 10,
-        color: Palette.textGray,
-    },
-    card: {
-        borderRadius: 15,
-        backgroundColor: Palette.cardBackground,
-        elevation: 5,
-    },
-    badge: {
-        backgroundColor: '#6200ee',
-        color: '#fff',
-        fontSize: 12,
-        paddingHorizontal: 6,
-        paddingVertical: 2,
-        borderRadius: 8,
-        marginLeft: 5,
-    },
-});
 
 export default Settings;

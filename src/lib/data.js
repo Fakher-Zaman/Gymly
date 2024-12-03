@@ -208,4 +208,39 @@ const exercises = [
     { id: '9', title: 'Waist Workout', image: require('../../assets/images/waist.png') },
 ];
 
-export { workoutData, nutritionData, exercises };
+
+const items = [
+    {
+        id: '1',
+        image: require('../../assets/images/slide4.png'),
+        text: 'Increase Endurance',
+    },
+    {
+        id: '2',
+        image: require('../../assets/images/slide5.png'),
+        text: 'Build Strength',
+    },
+    {
+        id: '3',
+        image: require('../../assets/images/slide3.png'),
+        text: 'Boost Stamina',
+    },
+    {
+        id: '4',
+        image: require('../../assets/images/slide1.png'),
+        text: 'Cardiovascular Health',
+    },
+    {
+        id: '5',
+        image: require('../../assets/images/slide2.png'),
+        text: 'Improve Flexibility',
+    },
+];
+
+const activities = [
+    { id: '1', title: 'Yoga Session', time: '10:00 AM', icon: 'spa' },
+    { id: '2', title: 'Cardio Workout', time: '2:00 PM', icon: 'running' },
+    { id: '3', title: 'Strength Training', time: '6:00 PM', icon: 'dumbbell' },
+];
+
+export { workoutData, nutritionData, exercises, items, activities };

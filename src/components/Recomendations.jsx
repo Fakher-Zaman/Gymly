@@ -3,35 +3,58 @@ import { View, StyleSheet, ImageBackground, FlatList } from 'react-native';
 import { Surface, Text } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import Palette from '../constants/colors';
+import { useSelector } from 'react-redux';
+import { items } from '../lib/data';
 
 export default function Recomendations() {
-    const items = [
-        {
-            id: '1',
-            image: require('../../assets/images/slide4.png'),
-            text: 'Increase Endurance',
+    const theme = useSelector((state) => state.theme);  // Access theme from Redux store
+    const isDarkMode = theme === 'dark';
+
+    const styles = StyleSheet.create({
+        recomendationsContainer: {
+            marginTop: 15,
         },
-        {
-            id: '2',
-            image: require('../../assets/images/slide5.png'),
-            text: 'Build Strength',
+        recomendationsHeading: {
+            fontSize: 22,
+            fontWeight: 'bold',
+            color: isDarkMode ? Palette.darkText : '#333',
         },
-        {
-            id: '3',
-            image: require('../../assets/images/slide3.png'),
-            text: 'Boost Stamina',
+        surfaceContainer: {
+            marginHorizontal: 10,
         },
-        {
-            id: '4',
-            image: require('../../assets/images/slide1.png'),
-            text: 'Cardiovascular Health',
+        surface: {
+            height: 200,
+            width: 150,
+            borderRadius: 8,
+            overflow: 'hidden',
         },
-        {
-            id: '5',
-            image: require('../../assets/images/slide2.png'),
-            text: 'Improve Flexibility',
+        imageBackground: {
+            height: '100%',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
-    ];
+        imageOpacity: {
+            opacity: 0.8,
+        },
+        overlayText: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            color: Palette.white,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 5,
+        },
+        text: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: Palette.white,
+        },
+        carousel: {
+            paddingVertical: 15,
+        },
+    });
 
     const renderItem = ({ item }) => (
         <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.surfaceContainer}>
@@ -61,49 +84,3 @@ export default function Recomendations() {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    recomendationsContainer: {
-        marginTop: 15,
-    },
-    recomendationsHeading: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: Palette.charcoal,
-    },
-    surfaceContainer: {
-        marginHorizontal: 10,
-    },
-    surface: {
-        height: 200,
-        width: 150,
-        borderRadius: 8,
-        overflow: 'hidden',
-    },
-    imageBackground: {
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    imageOpacity: {
-        opacity: 0.8,
-    },
-    overlayText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: Palette.white,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        borderRadius: 5,
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: Palette.white,
-    },
-    carousel: {
-        paddingVertical: 15,
-    },
-})

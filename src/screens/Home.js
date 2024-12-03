@@ -14,11 +14,102 @@ import BodyBuilderExercises from '../components/BodyBuilderExercises';
 const Home = ({ navigation }) => {
     const user = useSelector((state) => state.user.user);
     const progress = 75;
+    const theme = useSelector((state) => state.theme);  // Access theme from Redux store
+    const isDarkMode = theme === 'dark';
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            padding: 15,
+        },
+        welcomeContainer: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginVertical: 20,
+        },
+        headlineContainer: {
+            height: 65,
+        },
+        headline: {
+            fontSize: 20,
+            fontWeight: '600',
+            color: Palette.steel,
+            flex: 1,
+            marginRight: 10,
+        },
+        username: {
+            fontSize: 30,
+            fontWeight: '600',
+            color: isDarkMode ? Palette.darkText : Palette.charcoal,
+        },
+        avatar: {
+            backgroundColor: isDarkMode ? Palette.darkCardBackground : Palette.neutral,
+            shadowColor: isDarkMode ? Palette.darkText : "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+        },
+        surface: {
+            height: 170,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            borderRadius: 8,
+        },
+        imageBackground: {
+            height: '100%',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        imageOpacity: {
+            opacity: isDarkMode ? 0.8 : 0.7,
+            resizeMode: 'cover',
+        },
+        overlayText: {
+            color: '#FFFFFF',
+            fontSize: 18,
+            fontWeight: 'bold',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 5,
+        },
+        processContainer: {
+            position: 'absolute',
+            top: 10,
+            left: 10,
+        },
+        textContainer: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        text: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: Palette.white,
+        },
+        ratingContainer: {
+            position: 'absolute',
+            bottom: 15,
+            right: 15,
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 5,
+        },
+    });
 
     return (
         <PaperProvider>
             <ScrollView>
-                <View style={styles.container}>
+                <View style={styles.container} backgroundColor={isDarkMode ? Palette.darkBackground : '#fff'}>
                     <View style={styles.welcomeContainer}>
                         <View style={styles.headlineContainer}>
                             <Text style={styles.headline}>Welcome back 🙌</Text>
@@ -79,94 +170,5 @@ const Home = ({ navigation }) => {
         </PaperProvider>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 15,
-    },
-    welcomeContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginVertical: 20,
-    },
-    headlineContainer: {
-        height: 65,
-    },
-    headline: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: Palette.steel,
-        flex: 1,
-        marginRight: 10,
-    },
-    username: {
-        fontSize: 30,
-        fontWeight: '600',
-        color: Palette.charcoal,
-    },
-    avatar: {
-        backgroundColor: Palette.neutral,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    surface: {
-        height: 170,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        borderRadius: 8,
-    },
-    imageBackground: {
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    imageOpacity: {
-        opacity: 0.7,
-        resizeMode: 'cover',
-    },
-    overlayText: {
-        color: '#FFFFFF',
-        fontSize: 18,
-        fontWeight: 'bold',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        borderRadius: 5,
-    },
-    processContainer: {
-        position: 'absolute',
-        top: 10,
-        left: 10,
-    },
-    textContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: Palette.white,
-    },
-    ratingContainer: {
-        position: 'absolute',
-        bottom: 15,
-        right: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 5,
-    },
-});
 
 export default Home;

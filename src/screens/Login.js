@@ -11,7 +11,7 @@ import { getUser, login } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { TextInput } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/slices/userSlice';
 
@@ -20,6 +20,8 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
     const dispatch = useDispatch();
 
     const theme = useSelector((state) => state.theme);
@@ -33,6 +35,7 @@ export default function Login({ navigation }) {
         if (email.length < 1 || password.length < 1) {
             setError('All fields are required');
         } else {
+            setIsLoading(true);
             try {
                 await login(email, password);
                 const userData = await getUser();
@@ -61,6 +64,8 @@ export default function Login({ navigation }) {
                         },
                     },
                 });
+            } finally {
+                setIsLoading(false);
             }
         }
     };
@@ -105,9 +110,13 @@ export default function Login({ navigation }) {
             marginTop: 10,
         },
         btn: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 10,
             backgroundColor: Palette.primary,
-            padding: 10,
-            height: 45,
+            color: '#FFFFFF',
+            padding: 3,
             alignSelf: 'center',
             borderRadius: 5,
             width: '90%',
@@ -128,7 +137,7 @@ export default function Login({ navigation }) {
             fontSize: 18,
         },
         signUpContainer: {
-            marginTop: 80,
+            marginTop: 45,
         },
         noAccountLabel: {
             color: isDarkMode ? Palette.textGray : '#484848',
@@ -195,12 +204,14 @@ export default function Login({ navigation }) {
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
                 {/* Login button */}
-                <Pressable
-                    onPress={handleLogin}
+                <Button
+                    onPress={() => handleLogin()}
                     style={[styles.btn, { marginTop: error ? 10 : 20 }]}
+                    textColor={Palette.white}
+                    loading={isLoading}
                 >
                     <Text style={styles.btnText}>Login</Text>
-                </Pressable>
+                </Button>
 
                 {/* Sign up navigation */}
                 <Pressable

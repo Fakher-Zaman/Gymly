@@ -4,7 +4,7 @@ import { signup } from '../appwrite/service';
 import Palette from '../constants/colors';
 import Snackbar from 'react-native-snackbar';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { TextInput } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
 export default function Signup({ navigation }) {
@@ -15,6 +15,7 @@ export default function Signup({ navigation }) {
     const [repeatPassword, setRepeatPassword] = useState('');
     const [showPassword, setShowPassword] = useState(true);
     const [showRepeatPassword, setShowRepeatPassword] = useState(true); // Separate state for repeat password
+    const [isLoading, setIsLoading] = useState(false);
 
     const theme = useSelector((state) => state.theme);
     const isDarkMode = theme === 'dark';
@@ -39,6 +40,7 @@ export default function Signup({ navigation }) {
                 return;
             }
 
+            setIsLoading(true);
             const res = await signup(name, email, password);
 
             if (res) {
@@ -58,6 +60,8 @@ export default function Signup({ navigation }) {
         } catch (error) {
             console.log(error);
             setError(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -101,13 +105,17 @@ export default function Signup({ navigation }) {
             marginTop: 10,
         },
         btn: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 10,
             backgroundColor: Palette.primary,
-            padding: 10,
-            height: 45,
+            color: '#FFFFFF',
+            padding: 3,
             alignSelf: 'center',
             borderRadius: 5,
             width: '90%',
-            marginTop: 10,
+            marginTop: 20,
             shadowColor: '#000',
             shadowOffset: {
                 width: 0,
@@ -124,7 +132,7 @@ export default function Signup({ navigation }) {
             fontSize: 18,
         },
         loginContainer: {
-            marginTop: 60,
+            marginTop: 45,
         },
         haveAccountLabel: {
             color: '#484848',
@@ -239,12 +247,14 @@ export default function Signup({ navigation }) {
                 {/* Validation error */}
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-                {/* Signup button */}
-                <Pressable
+                <Button
                     onPress={handleSignUp}
-                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}>
+                    style={[styles.btn, { marginTop: error ? 10 : 20 }]}
+                    textColor={Palette.white}
+                    loading={isLoading}
+                >
                     <Text style={styles.btnText}>Sign Up</Text>
-                </Pressable>
+                </Button>
 
                 {/* Login navigation */}
                 <Pressable

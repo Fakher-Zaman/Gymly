@@ -11,6 +11,8 @@ import { toggleTheme } from '../redux/slices/themeSlice';
 const Settings = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
     const user = useSelector((state) => state.user.user);
+    const [isLoading, setIsLoading] = useState(false);
+
     const dispatch = useDispatch();
     const theme = useSelector((state) => state.theme);
     const isDarkMode = theme === 'dark';
@@ -19,6 +21,7 @@ const Settings = ({ navigation }) => {
     const hideDialog = () => setVisible(false);
 
     const handleLogout = async () => {
+        setIsLoading(true);
         try {
             await logout();
             dispatch(clearUser());
@@ -47,6 +50,7 @@ const Settings = ({ navigation }) => {
                 },
             });
         } finally {
+            setIsLoading(false);
             hideDialog();
         }
     };
@@ -219,6 +223,7 @@ const Settings = ({ navigation }) => {
                                 onPress={() => handleLogout()}
                                 style={styles.okayButton}
                                 textColor={Palette.white}
+                                loading={isLoading}
                             >
                                 Yes
                             </Button>

@@ -6,6 +6,7 @@ import { logout } from '../appwrite/service';
 import Snackbar from 'react-native-snackbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../redux/slices/userSlice';
+import { toggleTheme } from '../redux/slices/themeSlice';
 
 const Settings = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
@@ -15,7 +16,9 @@ const Settings = ({ navigation }) => {
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
-    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn)
+    // const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    const theme = useSelector((state) => state.theme);
+    const isDarkMode = theme === 'dark';
 
     const handleLogout = async () => {
         try {
@@ -59,10 +62,10 @@ const Settings = ({ navigation }) => {
                         style={styles.avatar}
                         source={require('../../assets/avatar.png')}
                     />
-                        <View style={{ height: 60, alignItems: 'center' }}>
-                            <Text style={styles.username}>{user?.name}</Text>
-                            <Text style={styles.email}>{user?.email}</Text>
-                        </View>
+                    <View style={{ height: 60, alignItems: 'center' }}>
+                        <Text style={styles.username}>{user?.name}</Text>
+                        <Text style={styles.email}>{user?.email}</Text>
+                    </View>
                     <Button
                         mode="contained"
                         style={styles.button}
@@ -104,7 +107,11 @@ const Settings = ({ navigation }) => {
                             title="Switch Mode"
                             left={(props) => <Avatar.Icon backgroundColor={Palette.primary} {...props} icon="toggle-switch" />}
                             right={(props) => (
-                                <Switch value={isSwitchOn} {...props} onValueChange={onToggleSwitch} color={Palette.primary} />
+                                <Switch
+                                    value={isDarkMode}
+                                    onValueChange={() => dispatch(toggleTheme())}
+                                    color={Palette.primary}
+                                />
                             )}
                         />
                         <Divider bold={true} horizontalInset={16} />

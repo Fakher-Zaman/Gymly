@@ -21,6 +21,8 @@ const Stack = createStackNavigator();
 
 export default function AppNavigator() {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const theme = useSelector((state) => state.theme);
+    console.log("Theme: ", theme);
     
     return (
         <NavigationContainer>

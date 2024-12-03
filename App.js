@@ -24,10 +24,6 @@ export default function App() {
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return <Loading />;
-  }
-
   // Font configuration
   const fontConfig = {
     default: {
@@ -72,9 +68,13 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <PaperProvider theme={theme}>
-          <AppNavigator />
-        </PaperProvider>
+        {!fontsLoaded ? (
+          <Loading />
+        ) : (
+          <PaperProvider theme={theme}>
+            <AppNavigator />
+          </PaperProvider>
+        )}
       </PersistGate>
     </Provider>
   );

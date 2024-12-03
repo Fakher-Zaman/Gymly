@@ -162,6 +162,7 @@ export default function Signup({ navigation }) {
                     style={styles.textInput}
                     outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
                     activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary700}
+                    textColor={isDarkMode && Palette.darkText}
                     right={<TextInput.Icon color={isDarkMode && Palette.textGray} icon="account" />}
                 />
 
@@ -181,6 +182,7 @@ export default function Signup({ navigation }) {
                     style={styles.textInput}
                     outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
                     activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary700}
+                    textColor={isDarkMode && Palette.darkText}
                     right={<TextInput.Icon color={isDarkMode && Palette.textGray} icon="email" />}
                 />
 
@@ -199,6 +201,7 @@ export default function Signup({ navigation }) {
                     style={styles.textInput}
                     outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
                     activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary700}
+                    textColor={isDarkMode && Palette.darkText}
                     right={
                         <TextInput.Icon
                             color={isDarkMode && Palette.textGray}
@@ -223,6 +226,7 @@ export default function Signup({ navigation }) {
                     style={styles.textInput}
                     outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
                     activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary700}
+                    textColor={isDarkMode && Palette.darkText}
                     right={
                         <TextInput.Icon
                             color={isDarkMode && Palette.textGray}

@@ -164,7 +164,8 @@ export default function Login({ navigation }) {
                     keyboardType="email-address"
                     autoCapitalize="none"
                     outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
-                    activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
+                    activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary700}
+                    textColor={isDarkMode && Palette.darkText}
                     right={<TextInput.Icon color={isDarkMode && Palette.textGray} icon="email" />}
                 />
 
@@ -178,8 +179,9 @@ export default function Login({ navigation }) {
                     onChangeText={(text) => setPassword(text)}
                     style={styles.textInput}
                     secureTextEntry={!showPassword}
-                    outlineColor={Palette.primary}
-                    activeOutlineColor={Palette.primary700}
+                    outlineColor={isDarkMode ? Palette.primary300 : Palette.primary}
+                    activeOutlineColor={isDarkMode ? Palette.primary300 : Palette.primary700}
+                    textColor={isDarkMode && Palette.darkText}
                     right={
                         <TextInput.Icon
                             color={isDarkMode && Palette.textGray}

@@ -21,6 +21,8 @@ const Stack = createStackNavigator();
 
 export default function AppNavigator() {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const theme = useSelector((state) => state.theme);
+    const isDarkMode = theme === 'dark';
     
     return (
         <NavigationContainer>
@@ -43,7 +45,7 @@ export default function AppNavigator() {
                 <Stack.Screen name="Nutritions" component={Nutritions} />
                 <Stack.Screen name="NutritionDetail" component={NutritionDetail} />
             </Stack.Navigator>
-            <StatusBar style="dark" />
+            <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         </NavigationContainer>
     );
 }

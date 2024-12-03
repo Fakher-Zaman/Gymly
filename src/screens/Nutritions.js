@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import AppbarHeader from '../components/AppbarHeader';
 import { nutritionData } from '../lib/data';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Searchbar } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import Palette from '../constants/colors';
 
@@ -23,27 +23,12 @@ export default function Nutritions({ navigation }) {
 
     const styles = StyleSheet.create({
         list: {
-            padding: 16,
+            paddingVertical: 8,
+            paddingHorizontal: 16,
         },
         searchContainer: {
             padding: 16,
             backgroundColor: isDarkMode ? Palette.darkBackground : '#f8f8f8',
-        },
-        searchWrapper: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: isDarkMode ? Palette.darkBackground : '#fff',
-            borderRadius: 8,
-            paddingHorizontal: 12,
-            borderWidth: 1,
-            borderColor: isDarkMode ? Palette.darkTextGray : '#ccc',
-        },
-        searchIcon: {
-            marginRight: 8,
-        },
-        searchInput: {
-            flex: 1,
-            height: 40,
         },
         card: {
             flexDirection: 'row',
@@ -74,10 +59,6 @@ export default function Nutritions({ navigation }) {
             color: isDarkMode ? Palette.darkTextGray : '#888',
             marginBottom: 4,
         },
-        details: {
-            fontSize: 12,
-            color: isDarkMode ? Palette.darkText : '#888',
-        },
     });
 
     const renderItem = ({ item }) => (
@@ -97,16 +78,19 @@ export default function Nutritions({ navigation }) {
         <>
             <AppbarHeader title="Nutritions" navigation={navigation} />
             <View style={styles.searchContainer}>
-                <View style={styles.searchWrapper}>
-                    <Icon name="search" size={20} color={isDarkMode ? Palette.darkText : '#888'} style={styles.searchIcon} />
-                    <TextInput
-                        style={styles.searchInput}
-                        placeholder="Search for nutrition..."
-                        placeholderTextColor={isDarkMode ? Palette.darkTextGray : '#888'}
-                        value={searchText}
-                        onChangeText={handleSearch}
-                    />
-                </View>
+                <Searchbar
+                    placeholder="Search for nutrition..."
+                    onChangeText={handleSearch}
+                    value={searchText}
+                    placeholderTextColor={isDarkMode ? Palette.darkTextGray : '#888'}
+                    inputStyle={{ color: isDarkMode ? Palette.darkText : '#333' }}
+                    iconColor={isDarkMode ? Palette.darkTextGray : '#888'}
+                    style={{
+                        backgroundColor: isDarkMode ? Palette.darkCardBackground : '#fff',
+                        borderRadius: 8,
+                        elevation: 2,
+                    }}
+                />
             </View>
             <FlatList
                 data={filteredData}

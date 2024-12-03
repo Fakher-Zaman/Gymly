@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     segmentedButtonContainer: {
         paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingVertical: 16,
     },
     card: {
         flexDirection: 'row',

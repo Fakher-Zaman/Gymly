@@ -18,7 +18,7 @@ const AppbarHeader = ({ title, navigation }) => {
     return (
         <Appbar.Header
             style={{
-                backgroundColor: isDarkMode ? Palette.darkNavBarBackground : Palette.navBarBackground, // Example: light background for light mode and dark for dark mode
+                backgroundColor: isDarkMode && Palette.darkNavBarBackground,
             }}
         >
             <Appbar.BackAction onPress={_goBack} color={isDarkMode ? Palette.darkText : Palette.charcoal} />

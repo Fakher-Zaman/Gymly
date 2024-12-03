@@ -112,9 +112,3 @@ export default function BottomNavigationBar() {
         </Tab.Navigator>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});

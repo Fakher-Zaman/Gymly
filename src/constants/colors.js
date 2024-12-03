@@ -20,7 +20,7 @@ const Palette = {
 
     // Dark theme colors
     darkBackground: '#121212',
-    darkCardBackground: '#1E1E1E',
+    darkCardBackground: '#2A2A2A',
     darkText: '#FFFFFF',
     darkTextGray: '#B3B3B3',
     navBarBackground: '#F0F2F5', // Light mode navbar background

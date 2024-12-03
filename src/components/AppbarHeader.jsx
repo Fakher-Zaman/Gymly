@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
+import { useSelector } from 'react-redux';
+import Palette from '../constants/colors';
 
 const AppbarHeader = ({ title, navigation }) => {
+    const theme = useSelector((state) => state.theme);
+    const isDarkMode = theme === 'dark';
 
     const _goBack = () => {
         if (navigation.canGoBack()) {
@@ -12,9 +16,13 @@ const AppbarHeader = ({ title, navigation }) => {
     };
 
     return (
-        <Appbar.Header>
-            <Appbar.BackAction onPress={_goBack} />
-            <Appbar.Content title={title} />
+        <Appbar.Header
+            style={{
+                backgroundColor: isDarkMode ? Palette.darkNavBarBackground : Palette.navBarBackground, // Example: light background for light mode and dark for dark mode
+            }}
+        >
+            <Appbar.BackAction onPress={_goBack} color={isDarkMode ? Palette.darkText : Palette.charcoal} />
+            <Appbar.Content title={title} color={isDarkMode ? Palette.darkText : Palette.charcoal} />
         </Appbar.Header>
     );
 };

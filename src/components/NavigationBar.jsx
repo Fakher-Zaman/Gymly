@@ -1,21 +1,24 @@
 import React from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, BottomNavigation } from 'react-native-paper';
+import { BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5Brands from 'react-native-vector-icons/FontAwesome5';
 import Home from '../screens/Home';
 import Settings from '../screens/Settings';
 import Workouts from '../screens/Workouts';
 import Nutritions from '../screens/Nutritions';
 import Pallete from '../constants/colors';
+import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomNavigationBar() {
+    const theme = useSelector((state) => state.theme);
+    const isDarkMode = theme === 'dark';
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -26,6 +29,8 @@ export default function BottomNavigationBar() {
                     navigationState={state}
                     safeAreaInsets={insets}
                     activeColor={Pallete.primary}
+                    inactiveColor={isDarkMode ? Pallete.darkText : Pallete.charcoal}
+                    style={{ backgroundColor: isDarkMode ? Pallete.darkNavBarBackground : Pallete.navBarBackground }}
                     onTabPress={({ route, preventDefault }) => {
                         const event = navigation.emit({
                             type: 'tabPress',

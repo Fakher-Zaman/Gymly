@@ -23,6 +23,8 @@ const Palette = {
     darkCardBackground: '#1E1E1E',
     darkText: '#FFFFFF',
     darkTextGray: '#B3B3B3',
+    navBarBackground: '#F0F2F5', // Light mode navbar background
+    darkNavBarBackground: '#1A1A1A',
 
     accent: '#FF9F43',
     neutral: '#E5E5E5',

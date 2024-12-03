@@ -82,6 +82,17 @@ const Settings = ({ navigation }) => {
             marginTop: 30,
             marginBottom: 20,
         },
+        avatar: {
+            backgroundColor: isDarkMode ? Palette.darkCardBackground : Palette.neutral,
+            shadowColor: isDarkMode ? Palette.darkText : "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+        },
         username: {
             fontSize: 28,
             fontWeight: '600',

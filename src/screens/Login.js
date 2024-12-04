@@ -209,6 +209,7 @@ export default function Login({ navigation }) {
                     style={[styles.btn, { marginTop: error ? 10 : 20 }]}
                     textColor={Palette.white}
                     loading={isLoading}
+                    labelStyle={!isLoading && { width: '100%' }}
                 >
                     <Text style={styles.btnText}>Login</Text>
                 </Button>
